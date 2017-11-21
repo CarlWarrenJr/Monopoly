@@ -1,7 +1,9 @@
 package Monoploy;
 
+import java.util.ArrayList;
+
 public class Player {
 	public String Token;
 	public String name;
-	public String[] possesions;
+	public ArrayList<String> possesions= new ArrayList<>();
 }

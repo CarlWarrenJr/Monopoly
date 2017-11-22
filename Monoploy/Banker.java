@@ -5,6 +5,13 @@ public class Banker {
 	public final int house = 32;
 	public int bal;
 	public ArrayList<String> properties=new ArrayList<>();
+	public final int bill500=500;
+	public final int bill100=100;
+	public final int bill50=50;
+	public final int bill20=20;
+	public final int bill10=10;
+	public final int bill5=5;
+	public final int bill1=1;
 	public void propertiesToBanker() {
 		properties.add("Atlantic Avenue");
 		properties.add("B & O Railroad");

@@ -35,5 +35,7 @@ public class Banker {
 		properties.add("Virginia Avenue");
 		properties.add("Water Works");
 	}
-	
+	public void buyPropertyFromBank(String bought) {
+		properties.remove(bought);
+	}
 }

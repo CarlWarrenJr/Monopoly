@@ -1,5 +1,7 @@
 package Monoploy;
+
 import java.util.ArrayList;
+
 public class Banker {
 	public final int hotels = 12;
 	public final int house = 32;
@@ -45,4 +47,5 @@ public class Banker {
 	public void buyPropertyFromBank(String bought) {
 		properties.remove(bought);
 	}
+	
 }

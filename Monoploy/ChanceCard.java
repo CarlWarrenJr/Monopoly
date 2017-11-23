@@ -21,7 +21,7 @@ public class ChanceCard {
 	private Random rand=new Random();
 public ArrayList<String> cards=new ArrayList<>();
 public ArrayList<String> deck=new ArrayList<>();
-private int gen=rand.nextInt(cards.size());
+private int gen;
 public void setCards() {
 	cards.add("Advance to Go (Collect $200)");
 	cards.add("Advance to Illinois AvevenueIf you pass Go, collect $200");
@@ -43,7 +43,9 @@ public void setCards() {
 }
 public void createDeck() {
 	int temp;
-	while(cards.size()>0) {
+	int size=cards.size();
+	while(deck.size()!=size) {
+		gen=rand.nextInt(cards.size());
 	deck.add(cards.get(gen));
 	temp =gen;
 	cards.remove(temp);

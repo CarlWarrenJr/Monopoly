@@ -27,7 +27,7 @@ public class Monopoly_game {
 						continue;
 					}
 						validPlayer = true;
-						card.setCards();
+						//card.setCards();
 						bdw.boardSetUp(numberPlayers);
 				} catch (NumberFormatException ex) {
 					System.out.println("Enter a Valid Integer between 2 and 8.");

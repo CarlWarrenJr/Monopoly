@@ -50,8 +50,8 @@ public void createDeck() {
 	temp =gen;
 	cards.remove(temp);
 	}
-	for(int i=0;i<deck.size();i++) {
+	/*for(int i=0;i<deck.size();i++) { tester to test if it is working as intended
 		System.out.println(deck.get(i));
-	}
+	}*/
 }
 }

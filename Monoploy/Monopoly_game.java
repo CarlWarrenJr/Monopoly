@@ -7,7 +7,8 @@ import java.io.InputStreamReader;
 public class Monopoly_game {
 	public static void main(String[] args) throws IOException {
 		Board bdw = new Board();
-		ChanceCard card =new ChanceCard();
+		ChanceCard chanceCard =new ChanceCard();
+		CommunityChest communityCard =new CommunityChest();
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String ageResponse;
 		do {
@@ -27,7 +28,11 @@ public class Monopoly_game {
 						continue;
 					}
 						validPlayer = true;
-						//card.setCards();
+						chanceCard.setCards();
+						System.out.println();
+						communityCard.setCards();
+						System.out.println();
+						communityCard.draw();
 						bdw.boardSetUp(numberPlayers);
 				} catch (NumberFormatException ex) {
 					System.out.println("Enter a Valid Integer between 2 and 8.");

@@ -1,3 +1,19 @@
 package Monoploy;
 
-public enum Piece {CAR, SHOE, HAT, BOAT, THIMBLE, MONEYBAG, IRON, DOG}
+import java.util.ArrayList;
+
+public class Piece  {
+	public ArrayList<String> piece = new ArrayList<>();
+
+	public void createToken() {
+		piece.add("Car");
+		piece.add("Shoe");
+		piece.add("Hat");
+		piece.add("Boat");
+		piece.add("Thimble");
+		piece.add("Moneybag");
+		piece.add("Iron");
+		piece.add("Dog");
+		
+	}
+}

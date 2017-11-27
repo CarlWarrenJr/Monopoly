@@ -22,37 +22,51 @@ public class Board {
 
 	private void setUpPlayers(int numberPlayers) throws IOException {
 		int pnum = 2;
-		for (int i = 0; i < numberPlayers; i++) {
+		for (int i = 1; i < numberPlayers; i++) {
 		if (pnum == 8) {
 			System.out.println("Player 8 Enter Your Name");
 			p8.name = in.readLine();
+			setMoney(p8);
 		} else if (pnum == 7) {
 			System.out.println("Player 7 Enter Your Name");
 			p7.name = in.readLine();
+			setMoney(p7);
 		} else if (pnum == 6) {
 			System.out.println("Player 6 Enter Your Name");
 			p6.name = in.readLine();
+			setMoney(p6);
 		} else if (pnum == 5) {
 			System.out.println("Player 5 Enter Your Name");
 			p5.name = in.readLine();
+			setMoney(p5);
 		} else if (pnum == 4) {
 			System.out.println("Player 4 Enter Your Name");
 			p4.name = in.readLine();
+			setMoney(p4);
 		} else if (pnum == 3) {
 			System.out.println("Player 3 Enter Your Name");
 			p3.name = in.readLine();
+			setMoney(p3);
 		} else if (pnum == 2) {
 			System.out.println("Player 1 Enter Your Name");
 			p1.name = in.readLine();
+			setMoney(p1);
 			System.out.println("Player 2 Enter Your Name");
 			p2.name = in.readLine();
+			setMoney(p2);
 		}
 		pnum++;
 		}
-		for (int i = 0; i < numberPlayers; i++) {
-			// player instance.money.add(banker.bill500).... for all the bills
+	}
+	
+	public void setMoney(Player player) {
+		for (int i = 0; i < 3; i++) {
+			player.Money[i] = 5;
 		}
-
+		player.Money[3] = 6;
+		for (int i = 4; i < 7;i++) {
+			player.Money[i] = 2;
+		}
 	}
 
 	public void boardPrint() {

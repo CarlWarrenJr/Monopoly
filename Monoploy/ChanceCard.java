@@ -56,17 +56,17 @@ public class ChanceCard {
 			temp = gen;
 			cards.remove(temp);
 		}
-		for (int i = 0; i < deck.size(); i++) {
+		/*for (int i = 0; i < deck.size(); i++) {
 			System.out.println(deck.get(i));
-		}
+		}*/
 	}
 
 	public void draw() {
 		String drawnCard = deck.remove(0);
 		System.out.println(drawnCard);
 		System.out.println();
-		for (int i = 0; i < deck.size(); i++) {
+		/*for (int i = 0; i < deck.size(); i++) {
 			System.out.println(deck.get(i));
-		}
+		}*/
 	}
 }

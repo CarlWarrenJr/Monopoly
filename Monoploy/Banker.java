@@ -47,5 +47,23 @@ public class Banker {
 	public void buyPropertyFromBank(String bought) {
 		properties.remove(bought);
 	}
-	
+	public int balCal(Player player) {
+	int totalBal;
+	int one = player.Money[0];
+	System.out.println("You have " + one +" 1 dollar bills");
+	int five = player.Money[1];
+	System.out.println("You have " + five +" 5 dollar bills");
+	int ten = player.Money[2];
+	System.out.println("You have " + ten +" 10 dollar bills");
+	int twenty = player.Money[3];
+	System.out.println("You have " + twenty +" twenty dollar bills");
+	int fifty = player.Money[4];
+	System.out.println("You have " + fifty +" 50 dollar bills");
+	int hundo = player.Money[5];
+	System.out.println("You have " + hundo +" 100 dollar bills");
+	int fiveHundo = player.Money[6];
+	System.out.println("You have " + fiveHundo +" 500 dollar bills");
+	totalBal = one + (five * 5) + (ten * 10) + (twenty * 20) + (fifty * 50) + (hundo * 100) + (fiveHundo * 500);
+	return totalBal;
+	}
 }

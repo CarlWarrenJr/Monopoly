@@ -30,7 +30,7 @@ public class Piece {
 				int k = piece.indexOf(token);
 				chosen = piece.remove(k);
 				validInput = true;
-			} catch (ArrayIndexOutOfBoundsException ex) {
+			} catch (IndexOutOfBoundsException ex) {
 				System.out.println("Please chose from the remainging pieces");
 				token = in.readLine();
 			}

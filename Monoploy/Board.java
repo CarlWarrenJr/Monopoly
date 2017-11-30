@@ -133,13 +133,13 @@ public class Board {
 				p4.diceRoll = promptForRandom(12, 2);
 				System.out.println(p4.getName() +" rolls a: " + p4.diceRoll);
 			} else if (pnum == 3) {
-				p3.diceRoll = promptForRandom(12, 2);
+				p3.diceRoll = 12;//promptForRandom(12, 2);
 				System.out.println(p3.getName() +" rolls a: " + p3.diceRoll);
 			} else if (pnum == 2) {
 				p1.diceRoll = promptForRandom(12, 2);
-				System.out.println(p2.getName() +" rolls a: " + p1.diceRoll);
-				p2.diceRoll = promptForRandom(12, 2);
-				System.out.println(p1.getName() +" rolls a: " + p2.diceRoll);
+				System.out.println(p1.getName() +" rolls a: " + p1.diceRoll);
+				p2.diceRoll = 12;//promptForRandom(12, 2);
+				System.out.println(p2.getName() +" rolls a: " + p2.diceRoll);
 			}
 			pnum++;
 		}
@@ -147,9 +147,12 @@ public class Board {
 		if ((p1.diceRoll >= p2.diceRoll) && (p1.diceRoll >= p3.diceRoll) && (p1.diceRoll >= p4.diceRoll)
 				&& (p1.diceRoll >= p5.diceRoll) && (p1.diceRoll >= p6.diceRoll) && (p1.diceRoll >= p7.diceRoll)
 				&& (p1.diceRoll >= p8.diceRoll)) {
-			tieCheck(p1);
+			boolean winner = tieCheck(p1);
 			p1.diceRoll = 0;
+			if (winner == true) {
 			tunOder.add(p1.getName());
+			}
+			
 			pnum = 2;
 			for (int i = 0; i < numberPlayers - 1; i++) {
 				if (pnum == 2) {
@@ -178,9 +181,11 @@ public class Board {
 		} else if ((p2.diceRoll >= p1.diceRoll) && (p2.diceRoll >= p3.diceRoll) && (p2.diceRoll >= p4.diceRoll)
 				&& (p2.diceRoll >= p5.diceRoll) && (p2.diceRoll >= p6.diceRoll) && (p2.diceRoll >= p7.diceRoll)
 				&& (p2.diceRoll >= p8.diceRoll)) {
-			tieCheck(p2);
+			boolean winner = tieCheck(p2);
 			p2.diceRoll = 0;
-			tunOder.add(p2.getName());
+			if (winner == true) {
+				tunOder.add(p2.getName());
+				}
 			pnum = 2;
 			for (int i = 0; i < 7; i++) {
 				if (pnum == 2) {
@@ -205,6 +210,9 @@ public class Board {
 					tunOder.add(p1.getName());
 				}
 				pnum++;
+			}
+			if (winner == false) {
+				tunOder.add(p2.getName());
 			}
 		} else if ((p3.diceRoll >= p1.diceRoll) && (p3.diceRoll >= p2.diceRoll) && (p3.diceRoll >= p4.diceRoll)
 				&& (p3.diceRoll >= p5.diceRoll) && (p3.diceRoll >= p6.diceRoll) && (p3.diceRoll >= p7.diceRoll)
@@ -395,23 +403,27 @@ public class Board {
 		}
 	}
 
-	private void tieCheck(Player player) {
+	private boolean tieCheck(Player player) {
+		boolean pWin = true;
 		boolean noTie = false;
 		while (noTie == false) {
-			if (p1.diceRoll == player.diceRoll && (player != p1)) {
+			/*if (p1.diceRoll == player.diceRoll && (player != p1)) {
 				p1.diceRoll = promptForRandom(12, 2);
 				System.out.println(p1.getName() +" rolls a: " +  p1.diceRoll);
 				player.diceRoll = promptForRandom(12, 2);
 				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
 				if (player.diceRoll != p1.diceRoll) {
-					noTie = true;
+					
 				}
-			} else if (p2.diceRoll == player.diceRoll && (player != p2)) {
+			} */if (p2.diceRoll == player.diceRoll && (player != p2)) {
 				player.diceRoll = promptForRandom(12, 2);
 				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
 				p2.diceRoll = promptForRandom(12, 2);
 				System.out.println(p2.getName() +" rolls a: " + p2.diceRoll);
 				if (player.diceRoll != p2.diceRoll) {
+					if (player.diceRoll > p2.diceRoll) {
+						pWin = false;
+					}
 					noTie = true;
 				}
 			} else if (p3.diceRoll == player.diceRoll && (player != p3)) {
@@ -420,6 +432,9 @@ public class Board {
 				p3.diceRoll = promptForRandom(12, 2);
 				System.out.println(p3.getName() +" rolls a: " + p3.diceRoll);
 				if (player.diceRoll != p3.diceRoll) {
+					if (player.diceRoll < p3.diceRoll) {
+						pWin = false;
+					}
 					noTie = true;
 				}
 			} else if (p4.diceRoll == player.diceRoll && (player != p4)) {
@@ -428,6 +443,9 @@ public class Board {
 				p4.diceRoll = promptForRandom(12, 2);
 				System.out.println(p4.getName() +" rolls a: " + p4.diceRoll);
 				if (player.diceRoll != p4.diceRoll) {
+					if (player.diceRoll < p4.diceRoll) {
+						pWin = false;
+					}
 					noTie = true;
 				}
 			} else if (p5.diceRoll == player.diceRoll && (player != p5)) {
@@ -436,6 +454,9 @@ public class Board {
 				p5.diceRoll = promptForRandom(12, 2);
 				System.out.println(p5.getName() +" rolls a: " + p5.diceRoll);
 				if (player.diceRoll != p5.diceRoll) {
+					if (player.diceRoll > p5.diceRoll) {
+						pWin = false;
+					}
 					noTie = true;
 				}
 			} else if (p6.diceRoll == player.diceRoll && (player != p6)) {
@@ -444,6 +465,9 @@ public class Board {
 				p6.diceRoll = promptForRandom(12, 2);
 				System.out.println(p6.getName() +" rolls a: " + p6.diceRoll);
 				if (player.diceRoll != p6.diceRoll) {
+					if (player.diceRoll > p6.diceRoll) {
+						pWin = false;
+					}
 					noTie = true;
 				}
 			} else if (p7.diceRoll == player.diceRoll && (player != p7)) {
@@ -452,6 +476,9 @@ public class Board {
 				p7.diceRoll = promptForRandom(12, 2);
 				System.out.println(p7.getName() +" rolls a: " + p7.diceRoll);
 				if (player.diceRoll != p7.diceRoll) {
+					if (player.diceRoll > p7.diceRoll) {
+						pWin = false;
+					}
 					noTie = true;
 				}
 			} else if (p8.diceRoll == player.diceRoll && (player != p8)) {
@@ -460,6 +487,9 @@ public class Board {
 				p8.diceRoll = promptForRandom(12, 2);
 				System.out.println(p8.getName() +" rolls a: " + p8.diceRoll);
 				if (player.diceRoll != p8.diceRoll) {
+					if (player.diceRoll > p8.diceRoll) {
+						pWin = false;
+					}
 					noTie = true;
 				}
 			}
@@ -467,6 +497,7 @@ public class Board {
 				noTie = true;
 			}
 		}
+		return pWin;
 	}
 
 	public static int promptForRandom(int max, int min) {

@@ -576,9 +576,18 @@ public class Board {
 					currentSpace = space.spaceFind(cplayer);
 					space.spaceName(cplayer,currentSpace);
 					System.out.println(cplayer.getName() + " Rolled a: " + cplayer.diceRoll+" and a "+cplayer.diceRoll2);
+					if(cplayer.diceRoll ==cplayer.diceRoll2) {
+						cplayer.numberOfDoubles++;
+					}
+					if(cplayer.numberOfDoubles<3) {
 					space.spaceChange(cplayer,currentSpace);
 					currentSpace = space.spaceFind(cplayer);
 					space.spaceName(cplayer,currentSpace);
+					}
+					else {
+						diceRolled = true;
+						//jail
+					}
 				}
 				else if (menuSelect == 2) {
 					System.out.println("Which Player would you like to trade with?\n" + tunOder);	

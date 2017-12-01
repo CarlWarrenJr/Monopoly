@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
-	public BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	public  BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	public Banker banker = new Banker();
 	public BoardSpace space = new BoardSpace();
 	Piece token = new Piece();
@@ -20,11 +20,13 @@ public class Board {
 	public Player p7 = new Player();
 	public Player p8 = new Player();
 	private ArrayList<String> tunOder = new ArrayList<>();
+	private String Menu = "What would you Like to do? \n1: Roll Dice 2: Trade with another 3: Build Houses/Hotels 4: Mortgage a Property";
 
 	public void boardSetUp(int numberPlayers) throws IOException {
 		setUpPlayers(numberPlayers);
-		space.spacesSetUp();
+		space.spacesInitalize(p1,p2,p3,p4,p5,p6,p7,p8);
 		orderOfPlay(numberPlayers);
+		System.out.println("Turn Order is as Follows: ");
 		for (int i = 0; i < numberPlayers; i++) {
 			System.out.println(tunOder.get(i));
 		}
@@ -37,81 +39,64 @@ public class Board {
 			if (pnum == 8) {
 				System.out.println("Player 8 Enter Your Name");
 				p8.setName(in.readLine());
-				setMoney(p8);
 				System.out.println(token.piece);
 				System.out.println("Enter the Token you want.");
 				p8.setToken(token.selectPiece(in.readLine()));
-				System.out.println(banker.balCal(p8));
+				System.out.println(p8.bal);
 			} else if (pnum == 7) {
 				System.out.println("Player 7 Enter Your Name");
 				p7.setName(in.readLine());
-				setMoney(p7);
 				System.out.println(token.piece);
 				System.out.println("Enter the Token you want.");
 				p7.setToken(token.selectPiece(in.readLine()));
-				System.out.println(banker.balCal(p7));
+				System.out.println(p7.bal);
 			} else if (pnum == 6) {
 				System.out.println("Player 6 Enter Your Name");
 				p6.setName(in.readLine());
-				setMoney(p6);
 				System.out.println(token.piece);
 				System.out.println("Enter the Token you want.");
 				p6.setToken(token.selectPiece(in.readLine()));
-				System.out.println(banker.balCal(p6));
+				System.out.println(p6.bal);
 			} else if (pnum == 5) {
 				System.out.println("Player 5 Enter Your Name");
 				p5.setName(in.readLine());
-				setMoney(p5);
 				System.out.println(token.piece);
 				System.out.println("Enter the Token you want.");
 				p5.setToken(token.selectPiece(in.readLine()));
-				System.out.println(banker.balCal(p5));
+				System.out.println(p5.bal);
 			} else if (pnum == 4) {
 				System.out.println("Player 4 Enter Your Name");
 				p4.setName(in.readLine());
-				setMoney(p4);
 				System.out.println(token.piece);
 				System.out.println("Enter the Token you want.");
 				p4.setToken(token.selectPiece(in.readLine()));
-				System.out.println(banker.balCal(p4));
+				System.out.println(p4.bal);
 			} else if (pnum == 3) {
 				System.out.println("Player 3 Enter Your Name");
 				p3.setName(in.readLine());
-				setMoney(p3);
 				System.out.println(token.piece);
 				System.out.println("Enter the Token you want.");
 				p3.setToken(token.selectPiece(in.readLine()));
-				System.out.println(banker.balCal(p3));
+				System.out.println(p3.bal);
 			} else if (pnum == 2) {
 				System.out.println("Player 1 Enter Your Name");
 				p1.setName(in.readLine());
-				setMoney(p1);
 				System.out.println(token.piece);
 				System.out.println("Enter the Token you want.");
 				p1.setToken(token.selectPiece(in.readLine()));
-				System.out.println(banker.balCal(p1));
+				System.out.println(p1.bal);
 
 				System.out.println("Player 2 Enter Your Name");
 				p2.setName(in.readLine());
-				setMoney(p2);
 				System.out.println(token.piece);
 				System.out.println("Enter the Token you want.");
 				p2.setToken(token.selectPiece(in.readLine()));
-				System.out.println(banker.balCal(p2));
+				System.out.println(p2.bal);
 			}
 			pnum++;
 		}
 	}
 
-	public void setMoney(Player player) {
-		for (int i = 0; i < 3; i++) {
-			player.Money[i] = 5;
-		}
-		player.Money[3] = 6;
-		for (int i = 4; i < 7; i++) {
-			player.Money[i] = 2;
-		}
-	}
 
 	private void orderOfPlay(int numberPlayers) {
 
@@ -133,12 +118,12 @@ public class Board {
 				p4.diceRoll = promptForRandom(12, 2);
 				System.out.println(p4.getName() +" rolls a: " + p4.diceRoll);
 			} else if (pnum == 3) {
-				p3.diceRoll = 12;//promptForRandom(12, 2);
+				p3.diceRoll = promptForRandom(12, 2);
 				System.out.println(p3.getName() +" rolls a: " + p3.diceRoll);
 			} else if (pnum == 2) {
 				p1.diceRoll = promptForRandom(12, 2);
 				System.out.println(p1.getName() +" rolls a: " + p1.diceRoll);
-				p2.diceRoll = 12;//promptForRandom(12, 2);
+				p2.diceRoll = promptForRandom(12, 2);
 				System.out.println(p2.getName() +" rolls a: " + p2.diceRoll);
 			}
 			pnum++;
@@ -541,5 +526,76 @@ public class Board {
 		System.out.println("│ T │______│		   │	      │				│     │ 	│	  │    │  	       │");
 		System.out.println("│ Visting  │		   │		  │ 			│     │ 	│	  │    │  	       │");
 		System.out.println("│__________│__________│__________│_____________│_____│_____│_____│____│___________│");
+	}
+
+
+	public void takeTurn(int numberPlayers) throws IOException {
+		Player cplayer = null ;
+		for (int i = 0; i < numberPlayers; i++) {
+			String cPlayer = tunOder.get(i);
+			System.out.println("It is your turn: " + cPlayer);
+			if (cPlayer == p1.getName()) {
+				cplayer = p1;
+			}
+			else if (cPlayer == p2.getName()) {
+				cplayer = p2;
+			}
+			else if (cPlayer == p3.getName()) {
+				cplayer = p3;
+			}
+			else if (cPlayer == p4.getName()) {
+				cplayer = p5;
+			}
+			else if (cPlayer == p6.getName()) {
+				cplayer = p6;
+			}
+			else if (cPlayer == p7.getName()) {
+				cplayer = p7;
+			}
+			else if (cPlayer == p8.getName()) {
+				cplayer = p8;
+			}
+			boolean diceRolled = false;
+			int menuSelect;
+			int currentSpace = 0;
+			while (diceRolled == false) {
+				menuSelect = promptForInt(Menu, 1, 4);
+				if (menuSelect == 1) {
+					cplayer.diceRoll = promptForRandom(12,2);
+					diceRolled = true;
+					currentSpace = space.spaceFind(cplayer);
+					space.spaceName(cplayer,currentSpace);
+				}
+				else if (menuSelect == 2) {
+					System.out.println("Which Player would you like to trade with?\n" + tunOder);	
+				}
+				else if (menuSelect ==3) {
+					
+				}
+				else if (menuSelect == 4) {
+					
+				}
+			}
+			
+		}
+	}
+	
+	public int promptForInt(String prompt, int min, int max) throws IOException {
+		int returnValue = 0;
+		boolean isValidInput = false;
+
+		while (!isValidInput) {
+			System.out.println(prompt);
+			String rawInput = in.readLine();
+			try {
+				returnValue = Integer.parseInt(rawInput);
+				if (returnValue >= min && returnValue <= max) {
+					isValidInput = true;
+				}
+			} catch (NumberFormatException ex) {
+				System.out.println("You Must Give Me A Valid Integer.");
+			}
+		}
+		return returnValue;
 	}
 }

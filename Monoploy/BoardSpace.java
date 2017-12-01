@@ -1,98 +1,141 @@
 package Monoploy;
 
+import java.util.Arrays;
+
 public class BoardSpace {
-	public String[] squares = new String[40];
-	public Player player=new Player();
-	public void spacesSetUp() {
-		
-		for (int i = 0; i < squares.length; i++) {
-			switch(player.space) {
-			case(1):
-				squares[i]="GO";
-			case(2):
-				squares[i]="MEDITERRANEAN AVENUE";
-			case(3):
-				squares[i]="COMMUNITY CHEST";
-			case(4):
-				squares[i]="BALTIC AVENUE";
-			case(5):
-				squares[i]="INCOME TAX";
-			case(6):
-				squares[i]="READING RAILROAD";
-			case(7):
-				squares[i]="ORIENTAL AVENUE";
-			case(8):
-				squares[i]="CHANCE";
-			case(9):
-				squares[i]="VERMONT AVENUE";
-			case(10):
-				squares[i]="CONNETICUT AVENUE";
-			case(11):
-				squares[i]="JAIL/ JUST VISITING";
-			case(12):
-				squares[i]="ST. CHARLES PLACE";
-			case(13):
-				squares[i]="ELECTRIC COMPANY";
-			case(14):
-				squares[i]="STATES AVENUE";
-			case(15):
-				squares[i]="VIRGINIA AVENUE";
-			case(16):
-				squares[i]="PENNSYLVANIA RAILROAD";
-			case(17):
-				squares[i]="ST. JAMES PLACE";
-			case(18):
-				squares[i]="COMMUNITY CHEST";
-			case(19):
-				squares[i]="TENNESEE AVENUE";
-			case(20):
-				squares[i]="NEW YORK AVENUE";
-			case(21):
-				squares[i]="FREE PARKING";
-			case(22):
-				squares[i]="KENTUKY AVENUE";
-			case(23):
-				squares[i]="CHANCE";
-			case(24):
-				squares[i]="INDIANA AVENUE";
-			case(25):
-				squares[i]="ILLINOIS AVENUE";
-			case(26):
-				squares[i]="B&O RAILROAD";
-			case(27):
-				squares[i]="ATLANTIC AVENUE";
-			case(28):
-				squares[i]="VENTOR AVENUE";
-			case(29):
-				squares[i]="WATER WORKS";
-			case(30):
-				squares[i]="MARVIN GARDENS";
-			case(31):
-				squares[i]="GO TO JAIL";
-			case(32):
-				squares[i]="PACIFIC AVENUE";
-			case(33):
-				squares[i]="NORTH CAROLINA AVENUE";
-			case(34):
-				squares[i]="COMMUNITY CHEST";
-			case(35):
-				squares[i]="PENNSYLVANIA AVENUE";
-			case(36):
-				squares[i]="SHORT LINE";
-			case(37):
-				squares[i]="CHANCE";
-			case(38):
-				squares[i]="PARK PLACE";
-			case(39):
-				squares[i]="LUXUARY TAX";
-			case(40):
-				squares[i]="BOARDWALK";
-			}
-			player.space++;
+
+	public void spacesInitalize(Player p1, Player p2, Player p3, Player p4, Player p5, Player p6, Player p7,
+			Player p8) {
+		for (int i = 0; i < p1.space.length; i++) {
+			p1.space[i] = "1";
+			p2.space[i] = "1";
+			p3.space[i] = "1";
+			p4.space[i] = "1";
+			p5.space[i] = "1";
+			p6.space[i] = "1";
+			p7.space[i] = "1";
+			p8.space[i] = "1";
 		}
-		
+		p1.space[0] = "0";
+		p2.space[0] = "0";
+		p3.space[0] = "0";
+		p4.space[0] = "0";
+		p5.space[0] = "0";
+		p6.space[0] = "0";
+		p7.space[0] = "0";
+		p8.space[0] = "0";
 	}
-	public void individualSpace() {
-		
+
+	public int spaceFind(Player player) {
+		int playerSpace = 50;
+		for (int i = 0; i < player.space.length; i++) {
+			if (player.space[i] == "0") {
+				playerSpace = Arrays.asList(player.space).indexOf("0");
+			}
+		}
+		return playerSpace;
+	}
+
+	public void spaceName(Player player, int space) {
+		if (space == 0) {
+			System.out.println(player.getName() + "'s current space is the Go Square");
+		} else if (space == 1) {
+			System.out.println(player.getName() + "'s current space is the Mediterranean Avenue!");
+		} else if (space == 2) {
+			System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+		} else if (space == 3) {
+			System.out.println(player.getName() + "'s current space is the BALTIC AVENUE!");
+		} else if (space == 4) {
+			System.out.println(player.getName() + "'s current space is the INCOME TAX!");
+		} else if (space == 5) {
+			System.out.println(player.getName() + "'s current space is the READING RAILROAD!");
+		} else if (space == 6) {
+			System.out.println(player.getName() + "'s current space is the ORIENTAL AVENUE!");
+		} else if (space == 7) {
+			System.out.println(player.getName() + "'s current space is the CHANCE!");
+		} else if (space == 8) {
+			System.out.println(player.getName() + "'s current space is the VERMONT AVENUE!");
+		} else if (space == 9) {
+			System.out.println(player.getName() + "'s current space is the CONNETICUT AVENUE!");
+		} else if (space == 10) {
+			System.out.print(player.getName() + "'s current space is the JAIL:");
+			if (player.inJail == true) {
+				System.out.print(" IN JAIL!");
+				System.out.println();
+			}
+			else {
+				System.out.print(" Just Visting!");
+				System.out.println();
+			}
+		} else if (space == 11) {
+			System.out.println(player.getName() + "'s current space is the ST. CHARLES PLACE!");
+		} else if (space == 12) {
+			System.out.println(player.getName() + "'s current space is the ELECTRIC COMPANY!");
+		} else if (space == 13) {
+			System.out.println(player.getName() + "'s current space is the STATES AVENUE!");
+		} else if (space == 14) {
+			System.out.println(player.getName() + "'s current space is the VIRGINIA AVENUE!");
+		} else if (space == 15) {
+			System.out.println(player.getName() + "'s current space is the PENNSYLVANIA RAILROAD!");
+		} else if (space == 16) {
+			System.out.println(player.getName() + "'s current space is the ST. JAMES PLACE!");
+		} else if (space == 17) {
+			System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+		} else if (space == 18) {
+			System.out.println(player.getName() + "'s current space is the TENNESEE AVENU!");
+		} else if (space == 19) {
+			System.out.println(player.getName() + "'s current space is the NEW YORK AVENUE!");
+		} else if (space == 20) {
+			System.out.println(player.getName() + "'s current space is the FREE PARKING!");
+		} else if (space == 21) {
+			System.out.println(player.getName() + "'s current space is the KENTUKY AVENUE!");
+		} else if (space == 22) {
+			System.out.println(player.getName() + "'s current space is the CHANCE!");
+		} else if (space == 23) {
+			System.out.println(player.getName() + "'s current space is the INDIANA AVENUE!");
+		} else if (space == 24) {
+			System.out.println(player.getName() + "'s current space is the ILLINOIS Avenue!");
+		} else if (space == 25) {
+			System.out.println(player.getName() + "'s current space is the B&O RAILROAD!");
+		} else if (space == 26) {
+			System.out.println(player.getName() + "'s current space is the ATLANTIC AVENUE!");
+		} else if (space == 27) {
+			System.out.println(player.getName() + "'s current space is the VENTOR AVENU!");
+		} else if (space == 28) {
+			System.out.println(player.getName() + "'s current space is the WATER WORKS!");
+		} else if (space == 29) {
+			System.out.println(player.getName() + "'s current space is the MARVIN GARDENS!");
+		} else if (space == 30) {
+			System.out.println(player.getName() + "'s current space is the GO TO JAIL!");
+		} else if (space == 31) {
+			System.out.println(player.getName() + "'s current space is the PACIFIC AVENUE!");
+		} else if (space == 32) {
+			System.out.println(player.getName() + "'s current space is the NORTH CAROLINA AVENUE!");
+		} else if (space == 33) {
+			System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+		} else if (space == 34) {
+			System.out.println(player.getName() + "'s current space is the PENNSYLVANIA AVENUE!");
+		} else if (space == 35) {
+			System.out.println(player.getName() + "'s current space is the SHORT LINE!");
+		} else if (space == 36) {
+			System.out.println(player.getName() + "'s current space is the CHANCE!");
+		} else if (space == 37) {
+			System.out.println(player.getName() + "'s current space is the PARK PLACE!");
+		} else if (space == 38) {
+			System.out.println(player.getName() + "'s current space is the LUXUARY TAX!");
+		} else if (space == 39) {
+			System.out.println(player.getName() + "'s current space is the BOARDWALK!");
+		} 
+	}
+	
+	public void spaceChange(Player player, int space) {
+		int hi = player.diceRoll + space;
+		if (hi > 40) {
+			space -= 40;
+		}
+		for (int i = 0; i < player.space.length; i++) {
+			player.space[i] = "1";
+		}
+		player.space[space + player.diceRoll] = "0";
 	}
 }

@@ -30,6 +30,7 @@ public class Board {
 		for (int i = 0; i < numberPlayers; i++) {
 			System.out.println(tunOder.get(i));
 		}
+		space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
 	}
 
 	private void setUpPlayers(int numberPlayers) throws IOException {
@@ -563,6 +564,10 @@ public class Board {
 				if (menuSelect == 1) {
 					cplayer.diceRoll = promptForRandom(12,2);
 					diceRolled = true;
+					currentSpace = space.spaceFind(cplayer);
+					space.spaceName(cplayer,currentSpace);
+					System.out.println(cplayer.getName() + " Rolled a: " + cplayer.diceRoll);
+					space.spaceChange(cplayer,currentSpace);
 					currentSpace = space.spaceFind(cplayer);
 					space.spaceName(cplayer,currentSpace);
 				}

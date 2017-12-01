@@ -129,13 +129,13 @@ public class BoardSpace {
 	}
 	
 	public void spaceChange(Player player, int space) {
-		int hi = player.diceRoll + space;
+		int hi = player.diceRoll+player.diceRoll2 + space;
 		if (hi > 40) {
 			space -= 40;
 		}
 		for (int i = 0; i < player.space.length; i++) {
 			player.space[i] = "1";
 		}
-		player.space[space + player.diceRoll] = "0";
+		player.space[space + player.diceRoll+player.diceRoll2] = "0";
 	}
 }

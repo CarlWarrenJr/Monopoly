@@ -7,6 +7,8 @@ public class Player {
 	private String token;
 	private String name;
 	public int diceRoll = 0;
+	public int diceRoll2 = 0;
+	public int numberOfDoubles=0;
 	public String[] space = new String[40];
 	public final int INITIAL_MONEY=1500;
 	public int[] Money = new int[7];

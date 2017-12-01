@@ -386,6 +386,11 @@ public class Board {
 				}
 				pnum++;
 			}
+			
+			}
+		if(numberPlayers==2&&tunOder.get(0)==p2.getName()) {
+			tunOder.remove(1);
+			tunOder.add(p1.getName());
 		}
 	}
 
@@ -494,39 +499,39 @@ public class Board {
 
 	public void boardPrint() {
 		System.out.println(" __________________________________________________________________________________");
-		System.out.println("│          │                                                          │           │");
-		System.out.println("│		    │														   │ 	       │");
-		System.out.println("│		    │														   │Go To      │");
-		System.out.println("│		    │														   │ Jail      │");
-		System.out.println("│__________│__________________________________________________________│___________│");
-		System.out.println("│		    │														   │  	       │");
-		System.out.println("│		    │														   │   	       │");
-		System.out.println("│		    │														   │   	       │");
-		System.out.println("│		    │		____________									   │  	       │");
-		System.out.println("│		    │		│  Chance  │									   │  	       │");
-		System.out.println("│		    │		│	Card   │ 									   │  	       │");
-		System.out.println("│		    │		│__________│			← ╫						   │  	       │");
-		System.out.println("│		    │									_					   │  	       │");
-		System.out.println("│		    │														   │  	       │");
-		System.out.println("│		    │														   │  	       │");
-		System.out.println("│		    │						MONOPOLY						   │  	       │");
-		System.out.println("│		    │			The Fast Dealing Property Trading Game  	   │  	       │");
-		System.out.println("│		    │														   │  	       │");
-		System.out.println("│		    │														   │  	       │");
-		System.out.println("│		    │									   ______________	   │   	       │");
-		System.out.println("│		    │									   │  Community │	   │  	       │");
-		System.out.println("│		    │								       │   Chest    │	   │  	       │");
-		System.out.println("│		    │									   │____________│	   │  	       │");
-		System.out.println("│		    │														   │  	       │");
-		System.out.println("│		    │														   │  	       │");
-		System.out.println("│______________________________________________________________________________│");
-		System.out.println("│   │  IN  │          │          │        │    │     │     │     │    │           │");
-		System.out.println("│ J │╫╫╫╫╫ │		   │		  │ 			│     │    │	 │    │   ←       │");
-		System.out.println("│ U │╫╫╫╫╫ │		   │		  │	    		│     │ 	│	 │    │   GO      │");
-		System.out.println("│ S │ Jail │	  	   │	      │				│     │ 	│	  │    │  	       │");
-		System.out.println("│ T │______│		   │	      │				│     │ 	│	  │    │  	       │");
-		System.out.println("│ Visting  │		   │		  │ 			│     │ 	│	  │    │  	       │");
-		System.out.println("│__________│__________│__________│_____________│_____│_____│_____│____│___________│");
+		System.out.println("â”‚          â”‚                                                          â”‚           â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚ 	       â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚Go To      â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚ Jail      â”‚");
+		System.out.println("â”‚__________â”‚__________________________________________________________â”‚___________â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚   	       â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚   	       â”‚");
+		System.out.println("â”‚		    â”‚		____________									   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚		â”‚  Chance  â”‚									   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚		â”‚	Card   â”‚ 									   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚		â”‚__________â”‚			â†� â•«						   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚									_					   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚						MONOPOLY						   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚			The Fast Dealing Property Trading Game  	   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚									   ______________	   â”‚   	       â”‚");
+		System.out.println("â”‚		    â”‚									   â”‚  Community â”‚	   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚								       â”‚   Chest    â”‚	   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚									   â”‚____________â”‚	   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
+		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
+		System.out.println("â”‚______________________________________________________________________________â”‚");
+		System.out.println("â”‚   â”‚  IN  â”‚          â”‚          â”‚        â”‚    â”‚     â”‚     â”‚     â”‚    â”‚           â”‚");
+		System.out.println("â”‚ J â”‚â•«â•«â•«â•«â•« â”‚		   â”‚		  â”‚ 			â”‚     â”‚    â”‚	 â”‚    â”‚   â†�       â”‚");
+		System.out.println("â”‚ U â”‚â•«â•«â•«â•«â•« â”‚		   â”‚		  â”‚	    		â”‚     â”‚ 	â”‚	 â”‚    â”‚   GO      â”‚");
+		System.out.println("â”‚ S â”‚ Jail â”‚	  	   â”‚	      â”‚				â”‚     â”‚ 	â”‚	  â”‚    â”‚  	       â”‚");
+		System.out.println("â”‚ T â”‚______â”‚		   â”‚	      â”‚				â”‚     â”‚ 	â”‚	  â”‚    â”‚  	       â”‚");
+		System.out.println("â”‚ Visting  â”‚		   â”‚		  â”‚ 			â”‚     â”‚ 	â”‚	  â”‚    â”‚  	       â”‚");
+		System.out.println("â”‚__________â”‚__________â”‚__________â”‚_____________â”‚_____â”‚_____â”‚_____â”‚____â”‚___________â”‚");
 	}
 
 
@@ -559,14 +564,18 @@ public class Board {
 			boolean diceRolled = false;
 			int menuSelect;
 			int currentSpace = 0;
+			cplayer.numberOfDoubles=0;
 			while (diceRolled == false) {
 				menuSelect = promptForInt(Menu, 1, 4);
 				if (menuSelect == 1) {
-					cplayer.diceRoll = promptForRandom(12,2);
+					cplayer.diceRoll = promptForRandom(6,1);
+					cplayer.diceRoll2 = promptForRandom(6,1);
+					if(cplayer.diceRoll !=cplayer.diceRoll2&&cplayer.numberOfDoubles<3) {
 					diceRolled = true;
+					}
 					currentSpace = space.spaceFind(cplayer);
 					space.spaceName(cplayer,currentSpace);
-					System.out.println(cplayer.getName() + " Rolled a: " + cplayer.diceRoll);
+					System.out.println(cplayer.getName() + " Rolled a: " + cplayer.diceRoll+" and a "+cplayer.diceRoll2);
 					space.spaceChange(cplayer,currentSpace);
 					currentSpace = space.spaceFind(cplayer);
 					space.spaceName(cplayer,currentSpace);

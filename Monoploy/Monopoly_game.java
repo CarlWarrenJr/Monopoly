@@ -33,7 +33,10 @@ public class Monopoly_game {
 						communityCard.setCards();
 						System.out.println();
 						bdw.boardSetUp(numberPlayers);
+						boolean JPMorgan = false;
+						while (JPMorgan == false) {
 						bdw.takeTurn(numberPlayers);
+						}
 				} catch (NumberFormatException ex) {
 					System.out.println("Enter a Valid Integer between 2 and 8.");
 				}

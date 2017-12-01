@@ -39,6 +39,10 @@ public class BoardSpace {
 	public void spaceName(Player player, int space) {
 		if (space == 0) {
 			System.out.println(player.getName() + "'s current space is the Go Square");
+			if (player.firstGo == false) {
+				passGo(player);
+			}
+			player.firstGo = false;
 		} else if (space == 1) {
 			System.out.println(player.getName() + "'s current space is the Mediterranean Avenue!");
 		} else if (space == 2) {
@@ -132,10 +136,16 @@ public class BoardSpace {
 		int hi = player.diceRoll+player.diceRoll2 + space;
 		if (hi > 40) {
 			space -= 40;
+			passGo(player);
 		}
 		for (int i = 0; i < player.space.length; i++) {
 			player.space[i] = "1";
 		}
 		player.space[space + player.diceRoll+player.diceRoll2] = "0";
+	}
+	
+	public void passGo(Player player) {
+		player.bal = player.bal + 200;
+		System.out.println(player.getName() + " has passsed GO and Collected $200. New Balance: " + player.bal);
 	}
 }

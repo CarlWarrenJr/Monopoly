@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Player {
 	public boolean inJail = false;
+	boolean firstGo = true;
 	private String token;
 	private String name;
 	public int diceRoll = 0;

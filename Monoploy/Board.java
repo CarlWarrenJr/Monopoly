@@ -398,15 +398,7 @@ public class Board {
 		boolean pWin = true;
 		boolean noTie = false;
 		while (noTie == false) {
-			/*if (p1.diceRoll == player.diceRoll && (player != p1)) {
-				p1.diceRoll = promptForRandom(12, 2);
-				System.out.println(p1.getName() +" rolls a: " +  p1.diceRoll);
-				player.diceRoll = promptForRandom(12, 2);
-				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
-				if (player.diceRoll != p1.diceRoll) {
-					
-				}
-			} */if (p2.diceRoll == player.diceRoll && (player != p2)) {
+			if (p2.diceRoll == player.diceRoll && (player != p2)) {
 				player.diceRoll = promptForRandom(12, 2);
 				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
 				p2.diceRoll = promptForRandom(12, 2);
@@ -498,40 +490,40 @@ public class Board {
 	}
 
 	public void boardPrint() {
-		System.out.println(" __________________________________________________________________________________");
-		System.out.println("â”‚          â”‚                                                          â”‚           â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚ 	       â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚Go To      â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚ Jail      â”‚");
-		System.out.println("â”‚__________â”‚__________________________________________________________â”‚___________â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚   	       â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚   	       â”‚");
-		System.out.println("â”‚		    â”‚		____________									   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚		â”‚  Chance  â”‚									   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚		â”‚	Card   â”‚ 									   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚		â”‚__________â”‚			â†� â•«						   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚									_					   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚						MONOPOLY						   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚			The Fast Dealing Property Trading Game  	   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚									   ______________	   â”‚   	       â”‚");
-		System.out.println("â”‚		    â”‚									   â”‚  Community â”‚	   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚								       â”‚   Chest    â”‚	   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚									   â”‚____________â”‚	   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
-		System.out.println("â”‚		    â”‚														   â”‚  	       â”‚");
-		System.out.println("â”‚______________________________________________________________________________â”‚");
-		System.out.println("â”‚   â”‚  IN  â”‚          â”‚          â”‚        â”‚    â”‚     â”‚     â”‚     â”‚    â”‚           â”‚");
-		System.out.println("â”‚ J â”‚â•«â•«â•«â•«â•« â”‚		   â”‚		  â”‚ 			â”‚     â”‚    â”‚	 â”‚    â”‚   â†�       â”‚");
-		System.out.println("â”‚ U â”‚â•«â•«â•«â•«â•« â”‚		   â”‚		  â”‚	    		â”‚     â”‚ 	â”‚	 â”‚    â”‚   GO      â”‚");
-		System.out.println("â”‚ S â”‚ Jail â”‚	  	   â”‚	      â”‚				â”‚     â”‚ 	â”‚	  â”‚    â”‚  	       â”‚");
-		System.out.println("â”‚ T â”‚______â”‚		   â”‚	      â”‚				â”‚     â”‚ 	â”‚	  â”‚    â”‚  	       â”‚");
-		System.out.println("â”‚ Visting  â”‚		   â”‚		  â”‚ 			â”‚     â”‚ 	â”‚	  â”‚    â”‚  	       â”‚");
-		System.out.println("â”‚__________â”‚__________â”‚__________â”‚_____________â”‚_____â”‚_____â”‚_____â”‚____â”‚___________â”‚");
+		System.out.println(" ────────────┬───────────────────────────────────────────────────────────┬───────────");
+		System.out.println("│            │                                                           │           │");
+		System.out.println("│		     │														     │ 	         │");
+		System.out.println("│		     │														     │Go To      │");
+		System.out.println("│		     │														     │ Jail      │");
+		System.out.println("│───────────│──────────────────────────────────────────────────────────  │───────────│");
+		System.out.println("│		     │														     │  	     │");
+		System.out.println("│		     │														     │           │");
+		System.out.println("│		     │														     │  	     │");
+		System.out.println("│		     │		────────────									     │  	     │");
+		System.out.println("│		     │		│  Chance  │									     │           │");
+		System.out.println("│		     │		│	Card   │ 									     │           │");
+		System.out.println("│		     │		│──────────│			│†� │					     │           │");
+		System.out.println("│		     │									─					     │           │");
+		System.out.println("│		     │														     │           │");
+		System.out.println("│		     │			─ │ ┌ ┐└ ┘├ ┤┬ ┴ ┼ ╫ ╗╔╚ ╝╠ ╣				     │           │");
+		System.out.println("│		     │						MONOPOLY						     │           │");
+		System.out.println("│		     │			The Fast Dealing Property Trading Game  	     │           │");
+		System.out.println("│		     │														     │           │");
+		System.out.println("│		     │														     │           │");
+		System.out.println("│		     │									   ──────────────	     │ 	         │");
+		System.out.println("│		     │									   │  Community │	     │  	     │");
+		System.out.println("│		     │								       │   Chest    │	     │  	     │");
+		System.out.println("│		     │									   │────────────│	     │  	     │");
+		System.out.println("│		     │														     │  	     │");
+		System.out.println("│		     │														     │  	     │");
+		System.out.println("│───────────────────────┬──────────┬─────────────┬─────┬─────┬─────┬─────┬───────────│");
+		System.out.println("│   │  IN    │          │          │       │ R&R │INCOM│BALT │COMM │MEDI.│           │");
+		System.out.println("│ J ││││││   │		    │		   │ 	   │ Rail│ TAX │ AVE │CHEST│     │           │");
+		System.out.println("│ U ││││││   │		    │		   │	   │ Road│$200 │     │	   │     │   GO      │");
+		System.out.println("│ S │ Jail   │	  	    │	       │	   │Cost:│  Or │ 	 │	   │     │           │");
+		System.out.println("│ T │────────│		    │	       │	   │  	 │ 10% │ 	 │	   │     │           │");
+		System.out.println("│ Visting    │		    │		           │ $200│     │ $60 │	   │ $60 │  	     │");
+		System.out.println("└────────────┴──────────┴──────────┴───────┴─────┴─────┴─────┴─────┴─────┴───────────┘");
 	}
 
 
@@ -586,7 +578,8 @@ public class Board {
 					}
 					else {
 						diceRolled = true;
-						//jail
+						cplayer.inJail = true;
+						space.spaceChange(cplayer, 0);
 					}
 				}
 				else if (menuSelect == 2) {

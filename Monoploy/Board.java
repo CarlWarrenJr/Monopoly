@@ -23,10 +23,12 @@ public class Board {
 	private String Menu = "What would you Like to do? \n1: Roll Dice 2: Trade with another 3: Build Houses/Hotels 4: Mortgage a Property";
 
 	public void boardSetUp(int numberPlayers) throws IOException {
+		banker.propertiesToBanker();
 		setUpPlayers(numberPlayers);
 		space.spacesInitalize(p1,p2,p3,p4,p5,p6,p7,p8);
 		orderOfPlay(numberPlayers);
 		System.out.println("Turn Order is as Follows: ");
+		//tunOder.remove(1);
 		for (int i = 0; i < numberPlayers; i++) {
 			System.out.println(tunOder.get(i));
 		}
@@ -389,7 +391,6 @@ public class Board {
 			
 			}
 		if(numberPlayers==2&&tunOder.get(0)==p2.getName()) {
-			tunOder.remove(1);
 			tunOder.add(p1.getName());
 		}
 	}
@@ -524,7 +525,7 @@ public class Board {
 		System.out.println("│ T │────────│		    │	       │	   │  	 │ 10% │ 	 │	   │     │           │");
 		System.out.println("│ Visting    │		    │		           │ $200│     │ $60 │	   │ $60 │  	     │");
 		System.out.println("└────────────┴──────────┴──────────┴───────┴─────┴─────┴─────┴─────┴─────┴───────────┘");
-	}
+}
 
 
 	public void takeTurn(int numberPlayers) throws IOException {
@@ -566,7 +567,7 @@ public class Board {
 					diceRolled = true;
 					}
 					currentSpace = space.spaceFind(cplayer);
-					space.spaceName(cplayer,currentSpace);
+					space.spaceName(cplayer,currentSpace,banker);
 					System.out.println(cplayer.getName() + " Rolled a: " + cplayer.diceRoll+" and a "+cplayer.diceRoll2);
 					if(cplayer.diceRoll ==cplayer.diceRoll2) {
 						cplayer.numberOfDoubles++;
@@ -574,7 +575,7 @@ public class Board {
 					if(cplayer.numberOfDoubles<3) {
 					space.spaceChange(cplayer,currentSpace);
 					currentSpace = space.spaceFind(cplayer);
-					space.spaceName(cplayer,currentSpace);
+					space.spaceName(cplayer,currentSpace,banker);
 					}
 					else {
 						diceRolled = true;

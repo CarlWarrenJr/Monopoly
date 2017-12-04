@@ -39,4 +39,8 @@ public class Banker {
 	public void buyPropertyFromBank(String bought) {
 		properties.remove(bought);
 	}
+	
+	public void auctionHouse() {
+		
+	}
 }

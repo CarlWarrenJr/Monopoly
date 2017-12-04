@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
-	public  BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	public BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	public Banker banker = new Banker();
 	public BoardSpace space = new BoardSpace();
 	Piece token = new Piece();
@@ -23,12 +23,17 @@ public class Board {
 	private String Menu = "What would you Like to do? \n1: Roll Dice 2: Trade with another 3: Build Houses/Hotels 4: Mortgage a Property";
 
 	public void boardSetUp(int numberPlayers) throws IOException {
-		banker.propertiesToBanker();
 		setUpPlayers(numberPlayers);
-		space.spacesInitalize(p1,p2,p3,p4,p5,p6,p7,p8);
+		space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
 		orderOfPlay(numberPlayers);
 		System.out.println("Turn Order is as Follows: ");
-		//tunOder.remove(1);
+		String kimp = p1.getName() + ":" + p1.getToken();
+		if (tunOder.get(0).matches(kimp)) {
+		tunOder.remove(null);
+		}
+		if (numberPlayers == 2 && !(tunOder.get(0).matches(kimp))) {
+			tunOder.remove(1);
+		}
 		for (int i = 0; i < numberPlayers; i++) {
 			System.out.println(tunOder.get(i));
 		}
@@ -100,34 +105,33 @@ public class Board {
 		}
 	}
 
-
 	private void orderOfPlay(int numberPlayers) {
 
 		int pnum = 2;
 		for (int i = 1; i < numberPlayers; i++) {
 			if (pnum == 8) {
 				p8.diceRoll = promptForRandom(12, 2);
-				System.out.println(p8.getName() +" rolls a: " + p8.diceRoll);
+				System.out.println(p8.getName() + " rolls a: " + p8.diceRoll);
 			} else if (pnum == 7) {
 				p7.diceRoll = promptForRandom(12, 2);
-				System.out.println(p7.getName() +" rolls a: " + p7.diceRoll);
+				System.out.println(p7.getName() + " rolls a: " + p7.diceRoll);
 			} else if (pnum == 6) {
 				p6.diceRoll = promptForRandom(12, 2);
-				System.out.println(p6.getName() +" rolls a: " + p6.diceRoll);
+				System.out.println(p6.getName() + " rolls a: " + p6.diceRoll);
 			} else if (pnum == 5) {
 				p5.diceRoll = promptForRandom(12, 2);
-				System.out.println(p5.getName() +" rolls a: " + p5.diceRoll);
+				System.out.println(p5.getName() + " rolls a: " + p5.diceRoll);
 			} else if (pnum == 4) {
 				p4.diceRoll = promptForRandom(12, 2);
-				System.out.println(p4.getName() +" rolls a: " + p4.diceRoll);
+				System.out.println(p4.getName() + " rolls a: " + p4.diceRoll);
 			} else if (pnum == 3) {
 				p3.diceRoll = promptForRandom(12, 2);
-				System.out.println(p3.getName() +" rolls a: " + p3.diceRoll);
+				System.out.println(p3.getName() + " rolls a: " + p3.diceRoll);
 			} else if (pnum == 2) {
 				p1.diceRoll = promptForRandom(12, 2);
-				System.out.println(p1.getName() +" rolls a: " + p1.diceRoll);
+				System.out.println(p1.getName() + " rolls a: " + p1.diceRoll);
 				p2.diceRoll = promptForRandom(12, 2);
-				System.out.println(p2.getName() +" rolls a: " + p2.diceRoll);
+				System.out.println(p2.getName() + " rolls a: " + p2.diceRoll);
 			}
 			pnum++;
 		}
@@ -138,31 +142,31 @@ public class Board {
 			boolean winner = tieCheck(p1);
 			p1.diceRoll = 0;
 			if (winner == true) {
-			tunOder.add(p1.getName());
+				tunOder.add(p1.getName() + ":" + p1.getToken());
 			}
-			
+
 			pnum = 2;
 			for (int i = 0; i < numberPlayers - 1; i++) {
 				if (pnum == 2) {
-					tunOder.add(p2.getName());
+					tunOder.add(p2.getName() + ":" + p2.getToken());
 				}
 				if (pnum == 3) {
-					tunOder.add(p3.getName());
+					tunOder.add(p3.getName() + ":" + p3.getToken());
 				}
 				if (pnum == 4) {
-					tunOder.add(p4.getName());
+					tunOder.add(p4.getName() + ":" + p4.getToken());
 				}
 				if (pnum == 5) {
-					tunOder.add(p5.getName());
+					tunOder.add(p5.getName() + ":" + p5.getToken());
 				}
 				if (pnum == 6) {
-					tunOder.add(p6.getName());
+					tunOder.add(p6.getName() + ":" + p6.getToken());
 				}
 				if (pnum == 7) {
-					tunOder.add(p7.getName());
+					tunOder.add(p7.getName() + ":" + p7.getToken());
 				}
 				if (pnum == 8) {
-					tunOder.add(p8.getName());
+					tunOder.add(p8.getName() + ":" + p8.getToken());
 				}
 				pnum++;
 			}
@@ -172,30 +176,30 @@ public class Board {
 			boolean winner = tieCheck(p2);
 			p2.diceRoll = 0;
 			if (winner == true) {
-				tunOder.add(p2.getName());
-				}
+				tunOder.add(p2.getName() + ":" + p2.getToken());
+			}
 			pnum = 2;
 			for (int i = 0; i < 7; i++) {
 				if (pnum == 2) {
-					tunOder.add(p3.getName());
+					tunOder.add(p3.getName() + ":" + p3.getToken());
 				}
 				if (pnum == 3 && (numberPlayers > 3)) {
-					tunOder.add(p4.getName());
+					tunOder.add(p4.getName() + ":" + p4.getToken());
 				}
 				if (pnum == 4 && (numberPlayers > 4)) {
-					tunOder.add(p5.getName());
+					tunOder.add(p5.getName() + ":" + p5.getToken());
 				}
 				if (pnum == 5 && (numberPlayers > 5)) {
-					tunOder.add(p6.getName());
+					tunOder.add(p6.getName() + ":" + p6.getToken());
 				}
 				if (pnum == 6 && (numberPlayers > 6)) {
-					tunOder.add(p7.getName());
+					tunOder.add(p7.getName() + ":" + p7.getToken());
 				}
 				if (pnum == 7 && (numberPlayers > 7)) {
-					tunOder.add(p8.getName());
+					tunOder.add(p8.getName() + ":" + p8.getToken());
 				}
 				if (pnum == 8) {
-					tunOder.add(p1.getName());
+					tunOder.add(p1.getName() + ":" + p1.getToken());
 				}
 				pnum++;
 			}
@@ -211,25 +215,25 @@ public class Board {
 			pnum = 2;
 			for (int i = 0; i < 7; i++) {
 				if (pnum == 2 && (numberPlayers > 3)) {
-					tunOder.add(p4.getName());
+					tunOder.add(p4.getName() + ":" + p4.getToken());
 				}
 				if (pnum == 3 && (numberPlayers > 4)) {
-					tunOder.add(p5.getName());
+					tunOder.add(p5.getName() + ":" + p5.getToken());
 				}
 				if (pnum == 4 && (numberPlayers > 5)) {
-					tunOder.add(p6.getName());
+					tunOder.add(p6.getName() + ":" + p6.getToken());
 				}
 				if (pnum == 5 && (numberPlayers > 6)) {
-					tunOder.add(p7.getName());
+					tunOder.add(p7.getName() + ":" + p7.getToken());
 				}
 				if (pnum == 6 && (numberPlayers > 7)) {
-					tunOder.add(p8.getName());
+					tunOder.add(p8.getName() + ":" + p8.getToken());
 				}
 				if (pnum == 7) {
-					tunOder.add(p1.getName());
+					tunOder.add(p1.getName() + ":" + p1.getToken());
 				}
 				if (pnum == 8) {
-					tunOder.add(p2.getName());
+					tunOder.add(p2.getName() + ":" + p2.getToken());
 				}
 				pnum++;
 			}
@@ -242,25 +246,25 @@ public class Board {
 			pnum = 2;
 			for (int i = 0; i < 7; i++) {
 				if (pnum == 2 && (numberPlayers > 4)) {
-					tunOder.add(p5.getName());
+					tunOder.add(p5.getName() + ":" + p5.getToken());
 				}
 				if (pnum == 3 && (numberPlayers > 5)) {
-					tunOder.add(p6.getName());
+					tunOder.add(p6.getName() + ":" + p6.getToken());
 				}
 				if (pnum == 4 && (numberPlayers > 6)) {
-					tunOder.add(p7.getName());
+					tunOder.add(p7.getName() + ":" + p7.getToken());
 				}
 				if (pnum == 5 && (numberPlayers > 7)) {
-					tunOder.add(p8.getName());
+					tunOder.add(p8.getName() + ":" + p8.getToken());
 				}
 				if (pnum == 6) {
-					tunOder.add(p1.getName());
+					tunOder.add(p1.getName() + ":" + p1.getToken());
 				}
 				if (pnum == 7) {
-					tunOder.add(p2.getName());
+					tunOder.add(p2.getName() + ":" + p2.getToken());
 				}
 				if (pnum == 8) {
-					tunOder.add(p3.getName());
+					tunOder.add(p3.getName() + ":" + p3.getToken());
 				}
 				pnum++;
 			}
@@ -273,25 +277,25 @@ public class Board {
 			pnum = 2;
 			for (int i = 0; i < 7; i++) {
 				if (pnum == 2 && (numberPlayers > 5)) {
-					tunOder.add(p6.getName());
+					tunOder.add(p6.getName() + ":" + p6.getToken());
 				}
 				if (pnum == 3 && (numberPlayers > 6)) {
-					tunOder.add(p7.getName());
+					tunOder.add(p7.getName() + ":" + p7.getToken());
 				}
 				if (pnum == 4 && (numberPlayers > 7)) {
-					tunOder.add(p8.getName());
+					tunOder.add(p8.getName() + ":" + p8.getToken());
 				}
 				if (pnum == 5) {
-					tunOder.add(p1.getName());
+					tunOder.add(p1.getName() + ":" + p1.getToken());
 				}
 				if (pnum == 6) {
-					tunOder.add(p2.getName());
+					tunOder.add(p2.getName() + ":" + p2.getToken());
 				}
 				if (pnum == 7) {
-					tunOder.add(p3.getName());
+					tunOder.add(p3.getName() + ":" + p3.getToken());
 				}
 				if (pnum == 8) {
-					tunOder.add(p4.getName());
+					tunOder.add(p4.getName() + ":" + p4.getToken());
 				}
 				pnum++;
 			}
@@ -304,25 +308,25 @@ public class Board {
 			pnum = 2;
 			for (int i = 0; i < numberPlayers - 1; i++) {
 				if (pnum == 2 && (numberPlayers > 6)) {
-					tunOder.add(p7.getName());
+					tunOder.add(p7.getName() + ":" + p7.getToken());
 				}
 				if (pnum == 3 && (numberPlayers > 7)) {
-					tunOder.add(p8.getName());
+					tunOder.add(p8.getName() + ":" + p8.getToken());
 				}
 				if (pnum == 4) {
-					tunOder.add(p1.getName());
+					tunOder.add(p1.getName() + ":" + p1.getToken());
 				}
 				if (pnum == 5) {
-					tunOder.add(p2.getName());
+					tunOder.add(p2.getName() + ":" + p2.getToken());
 				}
 				if (pnum == 6) {
-					tunOder.add(p3.getName());
+					tunOder.add(p3.getName() + ":" + p3.getToken());
 				}
 				if (pnum == 7) {
-					tunOder.add(p4.getName());
+					tunOder.add(p4.getName() + ":" + p4.getToken());
 				}
 				if (pnum == 8) {
-					tunOder.add(p5.getName());
+					tunOder.add(p5.getName() + ":" + p5.getToken());
 				}
 				pnum++;
 			}
@@ -335,25 +339,25 @@ public class Board {
 			pnum = 2;
 			for (int i = 0; i < numberPlayers - 1; i++) {
 				if (pnum == 2 && (numberPlayers > 7)) {
-					tunOder.add(p8.getName());
+					tunOder.add(p8.getName() + ":" + p8.getToken());
 				}
 				if (pnum == 3) {
-					tunOder.add(p1.getName());
+					tunOder.add(p1.getName() + ":" + p1.getToken());
 				}
 				if (pnum == 4) {
-					tunOder.add(p2.getName());
+					tunOder.add(p2.getName() + ":" + p2.getToken());
 				}
 				if (pnum == 5) {
-					tunOder.add(p3.getName());
+					tunOder.add(p3.getName() + ":" + p3.getToken());
 				}
 				if (pnum == 6) {
-					tunOder.add(p4.getName());
+					tunOder.add(p4.getName() + ":" + p4.getToken());
 				}
 				if (pnum == 7) {
-					tunOder.add(p5.getName());
+					tunOder.add(p5.getName() + ":" + p5.getToken());
 				}
 				if (pnum == 8) {
-					tunOder.add(p6.getName());
+					tunOder.add(p6.getName() + ":" + p6.getToken());
 				}
 				pnum++;
 			}
@@ -366,32 +370,32 @@ public class Board {
 			pnum = 2;
 			for (int i = 0; i < numberPlayers - 1; i++) {
 				if (pnum == 2) {
-					tunOder.add(p1.getName());
+					tunOder.add(p1.getName() + ":" + p1.getToken());
 				}
 				if (pnum == 3) {
-					tunOder.add(p2.getName());
+					tunOder.add(p2.getName() + ":" + p2.getToken());
 				}
 				if (pnum == 4) {
-					tunOder.add(p3.getName());
+					tunOder.add(p3.getName() + ":" + p3.getToken());
 				}
 				if (pnum == 5) {
-					tunOder.add(p4.getName());
+					tunOder.add(p4.getName() + ":" + p4.getToken());
 				}
 				if (pnum == 6) {
-					tunOder.add(p5.getName());
+					tunOder.add(p5.getName() + ":" + p5.getToken());
 				}
 				if (pnum == 7) {
-					tunOder.add(p6.getName());
+					tunOder.add(p6.getName() + ":" + p6.getToken());
 				}
 				if (pnum == 8) {
-					tunOder.add(p7.getName());
+					tunOder.add(p7.getName() + ":" + p7.getToken());
 				}
 				pnum++;
 			}
-			
-			}
-		if(numberPlayers==2&&tunOder.get(0)==p2.getName()) {
-			tunOder.add(p1.getName());
+
+		}
+		if (numberPlayers == 2 && tunOder.get(0) == p2.getName()) {
+			tunOder.add(p1.getName()  + ":" + p1.getToken());
 		}
 	}
 
@@ -401,9 +405,9 @@ public class Board {
 		while (noTie == false) {
 			if (p2.diceRoll == player.diceRoll && (player != p2)) {
 				player.diceRoll = promptForRandom(12, 2);
-				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
+				System.out.println(player.getName() + " rolls a: " + player.diceRoll);
 				p2.diceRoll = promptForRandom(12, 2);
-				System.out.println(p2.getName() +" rolls a: " + p2.diceRoll);
+				System.out.println(p2.getName() + " rolls a: " + p2.diceRoll);
 				if (player.diceRoll != p2.diceRoll) {
 					if (player.diceRoll > p2.diceRoll) {
 						pWin = false;
@@ -412,9 +416,9 @@ public class Board {
 				}
 			} else if (p3.diceRoll == player.diceRoll && (player != p3)) {
 				player.diceRoll = promptForRandom(12, 2);
-				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
+				System.out.println(player.getName() + " rolls a: " + player.diceRoll);
 				p3.diceRoll = promptForRandom(12, 2);
-				System.out.println(p3.getName() +" rolls a: " + p3.diceRoll);
+				System.out.println(p3.getName() + " rolls a: " + p3.diceRoll);
 				if (player.diceRoll != p3.diceRoll) {
 					if (player.diceRoll < p3.diceRoll) {
 						pWin = false;
@@ -423,9 +427,9 @@ public class Board {
 				}
 			} else if (p4.diceRoll == player.diceRoll && (player != p4)) {
 				player.diceRoll = promptForRandom(12, 2);
-				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
+				System.out.println(player.getName() + " rolls a: " + player.diceRoll);
 				p4.diceRoll = promptForRandom(12, 2);
-				System.out.println(p4.getName() +" rolls a: " + p4.diceRoll);
+				System.out.println(p4.getName() + " rolls a: " + p4.diceRoll);
 				if (player.diceRoll != p4.diceRoll) {
 					if (player.diceRoll < p4.diceRoll) {
 						pWin = false;
@@ -434,9 +438,9 @@ public class Board {
 				}
 			} else if (p5.diceRoll == player.diceRoll && (player != p5)) {
 				player.diceRoll = promptForRandom(12, 2);
-				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
+				System.out.println(player.getName() + " rolls a: " + player.diceRoll);
 				p5.diceRoll = promptForRandom(12, 2);
-				System.out.println(p5.getName() +" rolls a: " + p5.diceRoll);
+				System.out.println(p5.getName() + " rolls a: " + p5.diceRoll);
 				if (player.diceRoll != p5.diceRoll) {
 					if (player.diceRoll > p5.diceRoll) {
 						pWin = false;
@@ -445,9 +449,9 @@ public class Board {
 				}
 			} else if (p6.diceRoll == player.diceRoll && (player != p6)) {
 				player.diceRoll = promptForRandom(12, 2);
-				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
+				System.out.println(player.getName() + " rolls a: " + player.diceRoll);
 				p6.diceRoll = promptForRandom(12, 2);
-				System.out.println(p6.getName() +" rolls a: " + p6.diceRoll);
+				System.out.println(p6.getName() + " rolls a: " + p6.diceRoll);
 				if (player.diceRoll != p6.diceRoll) {
 					if (player.diceRoll > p6.diceRoll) {
 						pWin = false;
@@ -456,9 +460,9 @@ public class Board {
 				}
 			} else if (p7.diceRoll == player.diceRoll && (player != p7)) {
 				player.diceRoll = promptForRandom(12, 2);
-				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
+				System.out.println(player.getName() + " rolls a: " + player.diceRoll);
 				p7.diceRoll = promptForRandom(12, 2);
-				System.out.println(p7.getName() +" rolls a: " + p7.diceRoll);
+				System.out.println(p7.getName() + " rolls a: " + p7.diceRoll);
 				if (player.diceRoll != p7.diceRoll) {
 					if (player.diceRoll > p7.diceRoll) {
 						pWin = false;
@@ -467,17 +471,16 @@ public class Board {
 				}
 			} else if (p8.diceRoll == player.diceRoll && (player != p8)) {
 				player.diceRoll = promptForRandom(12, 2);
-				System.out.println(player.getName() +" rolls a: " + player.diceRoll);
+				System.out.println(player.getName() + " rolls a: " + player.diceRoll);
 				p8.diceRoll = promptForRandom(12, 2);
-				System.out.println(p8.getName() +" rolls a: " + p8.diceRoll);
+				System.out.println(p8.getName() + " rolls a: " + p8.diceRoll);
 				if (player.diceRoll != p8.diceRoll) {
 					if (player.diceRoll > p8.diceRoll) {
 						pWin = false;
 					}
 					noTie = true;
 				}
-			}
-			else {
+			} else {
 				noTie = true;
 			}
 		}
@@ -496,7 +499,7 @@ public class Board {
 		System.out.println("│		     │														     │ 	         │");
 		System.out.println("│		     │														     │Go To      │");
 		System.out.println("│		     │														     │ Jail      │");
-		System.out.println("│───────────│──────────────────────────────────────────────────────────  │───────────│");
+		System.out.println("│────────────│───────────────────────────────────────────────────────────│───────────│");
 		System.out.println("│		     │														     │  	     │");
 		System.out.println("│		     │														     │           │");
 		System.out.println("│		     │														     │  	     │");
@@ -517,86 +520,75 @@ public class Board {
 		System.out.println("│		     │									   │────────────│	     │  	     │");
 		System.out.println("│		     │														     │  	     │");
 		System.out.println("│		     │														     │  	     │");
-		System.out.println("│───────────────────────┬──────────┬─────────────┬─────┬─────┬─────┬─────┬───────────│");
+		System.out.println("│───────────────────────┬──────────┬───────┬─────┬─────┬─────┬─────┬─────┬───────────│");
 		System.out.println("│   │  IN    │          │          │       │ R&R │INCOM│BALT │COMM │MEDI.│           │");
 		System.out.println("│ J ││││││   │		    │		   │ 	   │ Rail│ TAX │ AVE │CHEST│     │           │");
 		System.out.println("│ U ││││││   │		    │		   │	   │ Road│$200 │     │	   │     │   GO      │");
 		System.out.println("│ S │ Jail   │	  	    │	       │	   │Cost:│  Or │ 	 │	   │     │           │");
 		System.out.println("│ T │────────│		    │	       │	   │  	 │ 10% │ 	 │	   │     │           │");
-		System.out.println("│ Visting    │		    │		           │ $200│     │ $60 │	   │ $60 │  	     │");
+		System.out.println("│ Visting    │		    │		   │       │ $200│     │ $60 │	   │ $60 │  	     │");
 		System.out.println("└────────────┴──────────┴──────────┴───────┴─────┴─────┴─────┴─────┴─────┴───────────┘");
-}
-
+	}
 
 	public void takeTurn(int numberPlayers) throws IOException {
-		Player cplayer = null ;
+		Player cplayer = p1;
 		for (int i = 0; i < numberPlayers; i++) {
 			String cPlayer = tunOder.get(i);
 			System.out.println("It is your turn: " + cPlayer);
 			if (cPlayer == p1.getName()) {
 				cplayer = p1;
-			}
-			else if (cPlayer == p2.getName()) {
+			} else if (cPlayer == p2.getName()) {
 				cplayer = p2;
-			}
-			else if (cPlayer == p3.getName()) {
+			} else if (cPlayer == p3.getName()) {
 				cplayer = p3;
-			}
-			else if (cPlayer == p4.getName()) {
+			} else if (cPlayer == p4.getName()) {
 				cplayer = p5;
-			}
-			else if (cPlayer == p6.getName()) {
+			} else if (cPlayer == p6.getName()) {
 				cplayer = p6;
-			}
-			else if (cPlayer == p7.getName()) {
+			} else if (cPlayer == p7.getName()) {
 				cplayer = p7;
-			}
-			else if (cPlayer == p8.getName()) {
+			} else if (cPlayer == p8.getName()) {
 				cplayer = p8;
 			}
 			boolean diceRolled = false;
 			int menuSelect;
 			int currentSpace = 0;
-			cplayer.numberOfDoubles=0;
+			cplayer.numberOfDoubles = 0;
 			while (diceRolled == false) {
 				menuSelect = promptForInt(Menu, 1, 4);
 				if (menuSelect == 1) {
-					cplayer.diceRoll = promptForRandom(6,1);
-					cplayer.diceRoll2 = promptForRandom(6,1);
-					if(cplayer.diceRoll !=cplayer.diceRoll2&&cplayer.numberOfDoubles<3) {
-					diceRolled = true;
+					cplayer.diceRoll = promptForRandom(6, 1);
+					cplayer.diceRoll2 = promptForRandom(6, 1);
+					if (cplayer.diceRoll != cplayer.diceRoll2 && cplayer.numberOfDoubles < 3) {
+						diceRolled = true;
 					}
 					currentSpace = space.spaceFind(cplayer);
-					space.spaceName(cplayer,currentSpace,banker);
-					System.out.println(cplayer.getName() + " Rolled a: " + cplayer.diceRoll+" and a "+cplayer.diceRoll2);
-					if(cplayer.diceRoll ==cplayer.diceRoll2) {
+					space.spaceName(cplayer, currentSpace,Board.this, banker);
+					System.out.println(
+							cplayer.getName() + " Rolled a: " + cplayer.diceRoll + " and a " + cplayer.diceRoll2);
+					if (cplayer.diceRoll == cplayer.diceRoll2) {
 						cplayer.numberOfDoubles++;
 					}
-					if(cplayer.numberOfDoubles<3) {
-					space.spaceChange(cplayer,currentSpace);
-					currentSpace = space.spaceFind(cplayer);
-					space.spaceName(cplayer,currentSpace,banker);
-					}
-					else {
+					if (cplayer.numberOfDoubles < 3) {
+						space.spaceChange(cplayer, currentSpace);
+						currentSpace = space.spaceFind(cplayer);
+						space.spaceName(cplayer, currentSpace,Board.this, banker);
+					} else {
 						diceRolled = true;
 						cplayer.inJail = true;
 						space.spaceChange(cplayer, 0);
 					}
-				}
-				else if (menuSelect == 2) {
-					System.out.println("Which Player would you like to trade with?\n" + tunOder);	
-				}
-				else if (menuSelect ==3) {
-					
-				}
-				else if (menuSelect == 4) {
-					
+				} else if (menuSelect == 2) {
+					System.out.println("Which Player would you like to trade with?\n" + tunOder);
+				} else if (menuSelect == 3) {
+
+				} else if (menuSelect == 4) {
+
 				}
 			}
-			
 		}
 	}
-	
+
 	public int promptForInt(String prompt, int min, int max) throws IOException {
 		int returnValue = 0;
 		boolean isValidInput = false;

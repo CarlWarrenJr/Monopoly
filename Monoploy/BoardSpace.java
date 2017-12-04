@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class BoardSpace {
+	private String jailMenu = "You are in Jail! These are your options:\n1:Try to Roll For Doubles 2.Trade with Others Free Card 3: Build on Propeties\n4: Morgage Property 5:Pay $50 Fine";
 	public BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 	public void spacesInitalize(Player p1, Player p2, Player p3, Player p4, Player p5, Player p6, Player p7,
@@ -40,11 +41,17 @@ public class BoardSpace {
 		return playerSpace;
 	}
 
-	public void spaceName(Player player, int space, Banker banker) throws IOException {
+	public void spaceName(Player player, int space, Board bd, Banker banker) throws IOException {
 		if (space == 0) {
-			System.out.println(player.getName() + "'s current space is the Go Square");
-			if (player.firstGo == false) {
-				passGo(player);
+			if (player.startedOn == false) {
+				player.startedOn = true;
+				System.out.println(player.getName() + "'s current space is the Go Square");
+				if (player.firstGo == false) {
+					passGo(player);
+				}
+			} else {
+				System.out.println(player.getName() + "'s current space is the Go Square");
+				player.startedOn = false;
 			}
 			player.firstGo = false;
 		} else if (space == 1) {
@@ -81,12 +88,31 @@ public class BoardSpace {
 		} else if (space == 9) {
 			System.out.println(player.getName() + "'s current space is the CONNETICUT AVENUE!");
 			if (banker.properties.contains("Conneticut Avenue")) {
-				buyit("Conneticut Avenue", player, banker);}
+				buyit("Conneticut Avenue", player, banker);
+			}
 		} else if (space == 10) {
 			System.out.print(player.getName() + "'s current space is the JAIL:");
+			player.inJail = true;
 			if (player.inJail == true) {
 				System.out.print(" IN JAIL!");
-				System.out.println();
+				int jail = bd.promptForInt(jailMenu, 1, 5);
+				if (jail == 1) {
+					player.diceRoll = bd.promptForRandom(6, 1);
+					player.diceRoll2 = bd.promptForRandom(6, 1);
+					if (player.diceRoll == player.diceRoll2) {
+						player.inJail = false;
+					}
+				} else if (jail == 2) {
+					// Buy/Use Get out of Jail Free Card and Trade with others
+				} else if (jail == 3) {
+					// Build on Properties
+				} else if (jail == 4) {
+					// Mortgage
+				} else if (jail == 5) {
+					player.bal -= 50;
+					System.out.println(player.getName() + " Has payed a Fine of $50 and is no longer in Jail.");
+					player.inJail = false;
+				}
 			} else {
 				System.out.print(" Just Visting!");
 				System.out.println();
@@ -197,7 +223,6 @@ public class BoardSpace {
 			buyit("Board Walk", player, banker);}
 		}
 	}
-
 	private void buyit(String proprty, Player player, Banker banker) throws IOException {
 		String response = "";
 		String notEnoughMoney = "";
@@ -322,15 +347,17 @@ public class BoardSpace {
 	}
 
 	public void spaceChange(Player player, int space) {
-		int hi = player.diceRoll + player.diceRoll2 + space;
-		if (hi > 40) {
-			space -= 40;
-			passGo(player);
+		if (player.inJail == false) {
+			int hi = player.diceRoll + player.diceRoll2 + space;
+			if (hi > 40) {
+				space -= 40;
+				passGo(player);
+			}
+			for (int i = 0; i < player.space.length; i++) {
+				player.space[i] = "1";
+			}
+			player.space[space + player.diceRoll + player.diceRoll2] = "0";
 		}
-		for (int i = 0; i < player.space.length; i++) {
-			player.space[i] = "1";
-		}
-		player.space[space + player.diceRoll + player.diceRoll2] = "0";
 	}
 
 	public void passGo(Player player) {

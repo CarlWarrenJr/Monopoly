@@ -19,6 +19,7 @@ public class Player {
 	public ArrayList<String> MorgegedPrpoerties = new ArrayList<>();
 	public ArrayList<String> other= new ArrayList<>();
 	public int bid=0;
+	public boolean win=false;
 	public void setName(String name) {
 		this.name = name;
 	}

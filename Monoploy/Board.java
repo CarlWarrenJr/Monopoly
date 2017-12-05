@@ -531,7 +531,8 @@ public class Board {
 		System.out.println("└────────────┴──────────┴──────────┴───────┴─────┴─────┴─────┴─────┴─────┴───────────┘");
 	}
 
-	public void takeTurn(int numberPlayers) throws IOException {
+	public boolean takeTurn(int numberPlayers) throws IOException {
+		boolean winner = checkWin();
 		Player cplayer = p1;
 		for (int i = 0; i < numberPlayers; i++) {
 			String cuPlayer = tunOder.get(i);
@@ -566,7 +567,7 @@ public class Board {
 						diceRolled = true;
 					}
 					currentSpace = space.spaceFind(cplayer);
-					space.spaceName(cplayer, currentSpace, banker,p1,p2,p3,p4,p5,p6,p7,p8,tunOder);
+					space.spaceName(cplayer, currentSpace, banker, p1, p2, p3, p4, p5, p6, p7, p8, tunOder);
 					System.out.println(
 							cplayer.getName() + " Rolled a: " + cplayer.diceRoll + " and a " + cplayer.diceRoll2);
 					if (cplayer.diceRoll == cplayer.diceRoll2) {
@@ -575,7 +576,7 @@ public class Board {
 					if (cplayer.numberOfDoubles < 3) {
 						space.spaceChange(cplayer, currentSpace);
 						currentSpace = space.spaceFind(cplayer);
-						space.spaceName(cplayer, currentSpace, banker,p1,p2,p3,p4,p5,p6,p7,p8,tunOder);
+						space.spaceName(cplayer, currentSpace, banker, p1, p2, p3, p4, p5, p6, p7, p8, tunOder);
 					} else {
 						diceRolled = true;
 						cplayer.inJail = true;
@@ -590,6 +591,47 @@ public class Board {
 				}
 			}
 		}
+
+		return winner;
+
+	}
+
+	private boolean checkWin() {
+		boolean winner = false;
+		if ((p1.bal != 0 && p2.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
+				&& p8.bal == 0)&&p1.ownedProperties.isEmpty()) {
+			p1.win = true;
+			winner = p1.win;
+		} else if ((p2.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
+				&& p8.bal == 0)&&p2.ownedProperties.isEmpty()) {
+			p2.win = true;
+			winner = p2.win;
+		} else if ((p3.bal != 0 && p1.bal == 0 && p2.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
+				&& p8.bal == 0)&&p3.ownedProperties.isEmpty()) {
+			p3.win = true;
+			winner = p3.win;
+		} else if ((p4.bal != 0 && p1.bal == 0 && p3.bal == 0 && p2.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
+				&& p8.bal == 0)&&p4.ownedProperties.isEmpty()) {
+			p4.win = true;
+			winner = p4.win;
+		} else if ((p5.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p2.bal == 0 && p6.bal == 0 && p7.bal == 0
+				&& p8.bal == 0)&&p5.ownedProperties.isEmpty()) {
+			p5.win = true;
+			winner = p5.win;
+		} else if ((p6.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p2.bal == 0 && p7.bal == 0
+				&& p8.bal == 0)&&p6.ownedProperties.isEmpty()) {
+			p6.win = true;
+			winner = p6.win;
+		} else if ((p7.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p2.bal == 0
+				&& p8.bal == 0)&&!p7.ownedProperties.isEmpty()) {
+			p7.win = true;
+			winner = p7.win;
+		} else if ((p8.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
+				&& p2.bal == 0)&&p8.ownedProperties.isEmpty()) {
+			p8.win = true;
+			winner = p8.win;
+		}
+		return winner;
 	}
 
 	public int promptForInt(String prompt, int min, int max) throws IOException {

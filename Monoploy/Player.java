@@ -18,6 +18,7 @@ public class Player {
 	public ArrayList<String> ownedProperties= new ArrayList<>();
 	public ArrayList<String> MorgegedPrpoerties = new ArrayList<>();
 	public ArrayList<String> other= new ArrayList<>();
+	public int bid=0;
 	public void setName(String name) {
 		this.name = name;
 	}

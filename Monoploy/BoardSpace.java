@@ -251,6 +251,7 @@ public class BoardSpace {
 			}
 		} else {
 			// auction
+			
 		}
 	}
 

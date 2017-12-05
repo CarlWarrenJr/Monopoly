@@ -30,7 +30,7 @@ public class Board {
 		System.out.println("Turn Order is as Follows: ");
 		String kimp = p1.getName() + ":" + p1.getToken();
 		if (tunOder.get(0).matches(kimp)) {
-		tunOder.remove(null);
+			tunOder.remove(null);
 		}
 		if (numberPlayers == 2 && !(tunOder.get(0).matches(kimp))) {
 			tunOder.remove(1);
@@ -396,7 +396,7 @@ public class Board {
 
 		}
 		if (numberPlayers == 2 && tunOder.get(0) == p2.getName()) {
-			tunOder.add(p1.getName()  + ":" + p1.getToken());
+			tunOder.add(p1.getName() + ":" + p1.getToken());
 		}
 	}
 
@@ -410,7 +410,7 @@ public class Board {
 				p2.diceRoll = promptForRandom(12, 2);
 				System.out.println(p2.getName() + " rolls a: " + p2.diceRoll);
 				if (player.diceRoll != p2.diceRoll) {
-					if (player.diceRoll > p2.diceRoll) {
+					if (player.diceRoll < p2.diceRoll) {
 						pWin = false;
 					}
 					noTie = true;
@@ -443,7 +443,7 @@ public class Board {
 				p5.diceRoll = promptForRandom(12, 2);
 				System.out.println(p5.getName() + " rolls a: " + p5.diceRoll);
 				if (player.diceRoll != p5.diceRoll) {
-					if (player.diceRoll > p5.diceRoll) {
+					if (player.diceRoll < p5.diceRoll) {
 						pWin = false;
 					}
 					noTie = true;
@@ -454,7 +454,7 @@ public class Board {
 				p6.diceRoll = promptForRandom(12, 2);
 				System.out.println(p6.getName() + " rolls a: " + p6.diceRoll);
 				if (player.diceRoll != p6.diceRoll) {
-					if (player.diceRoll > p6.diceRoll) {
+					if (player.diceRoll < p6.diceRoll) {
 						pWin = false;
 					}
 					noTie = true;
@@ -465,7 +465,7 @@ public class Board {
 				p7.diceRoll = promptForRandom(12, 2);
 				System.out.println(p7.getName() + " rolls a: " + p7.diceRoll);
 				if (player.diceRoll != p7.diceRoll) {
-					if (player.diceRoll > p7.diceRoll) {
+					if (player.diceRoll < p7.diceRoll) {
 						pWin = false;
 					}
 					noTie = true;
@@ -476,7 +476,7 @@ public class Board {
 				p8.diceRoll = promptForRandom(12, 2);
 				System.out.println(p8.getName() + " rolls a: " + p8.diceRoll);
 				if (player.diceRoll != p8.diceRoll) {
-					if (player.diceRoll > p8.diceRoll) {
+					if (player.diceRoll < p8.diceRoll) {
 						pWin = false;
 					}
 					noTie = true;
@@ -534,21 +534,23 @@ public class Board {
 	public void takeTurn(int numberPlayers) throws IOException {
 		Player cplayer = p1;
 		for (int i = 0; i < numberPlayers; i++) {
-			String cPlayer = tunOder.get(i);
-			System.out.println("It is your turn: " + cPlayer);
-			if (cPlayer == p1.getName()) {
+			String cuPlayer = tunOder.get(i);
+			System.out.println("It is your turn: " + cuPlayer);
+			if (cuPlayer.equalsIgnoreCase(p1.getName() + ":" + p1.getToken())) {
 				cplayer = p1;
-			} else if (cPlayer == p2.getName()) {
+			} else if (cuPlayer.equalsIgnoreCase(p2.getName() + ":" + p2.getToken())) {
 				cplayer = p2;
-			} else if (cPlayer == p3.getName()) {
+			} else if (cuPlayer.equalsIgnoreCase(p3.getName() + ":" + p3.getToken())) {
 				cplayer = p3;
-			} else if (cPlayer == p4.getName()) {
+			} else if (cuPlayer.equalsIgnoreCase(p4.getName() + ":" + p4.getToken())) {
+				cplayer = p4;
+			} else if (cuPlayer.equalsIgnoreCase(p5.getName() + ":" + p5.getToken())) {
 				cplayer = p5;
-			} else if (cPlayer == p6.getName()) {
+			} else if (cuPlayer.equalsIgnoreCase(p6.getName() + ":" + p6.getToken())) {
 				cplayer = p6;
-			} else if (cPlayer == p7.getName()) {
+			} else if (cuPlayer.equalsIgnoreCase(p7.getName() + ":" + p7.getToken())) {
 				cplayer = p7;
-			} else if (cPlayer == p8.getName()) {
+			} else if (cuPlayer.equalsIgnoreCase(p8.getName() + ":" + p8.getToken())) {
 				cplayer = p8;
 			}
 			boolean diceRolled = false;
@@ -564,7 +566,7 @@ public class Board {
 						diceRolled = true;
 					}
 					currentSpace = space.spaceFind(cplayer);
-					space.spaceName(cplayer, currentSpace,Board.this, banker);
+					space.spaceName(cplayer, currentSpace, banker,p1,p2,p3,p4,p5,p6,p7,p8,tunOder);
 					System.out.println(
 							cplayer.getName() + " Rolled a: " + cplayer.diceRoll + " and a " + cplayer.diceRoll2);
 					if (cplayer.diceRoll == cplayer.diceRoll2) {
@@ -573,7 +575,7 @@ public class Board {
 					if (cplayer.numberOfDoubles < 3) {
 						space.spaceChange(cplayer, currentSpace);
 						currentSpace = space.spaceFind(cplayer);
-						space.spaceName(cplayer, currentSpace,Board.this, banker);
+						space.spaceName(cplayer, currentSpace, banker,p1,p2,p3,p4,p5,p6,p7,p8,tunOder);
 					} else {
 						diceRolled = true;
 						cplayer.inJail = true;

@@ -117,25 +117,25 @@ public class Banker {
 		bids.add(p8.bid);
 		compare(bids,numberPlayers);
 		if(p8.bid!=0&&p7.bid!=0&&p6.bid!=0&&p5.bid!=0&&p4.bid!=0&&p3.bid!=0&&p2.bid!=0&&p1.bid!=0) {
-		if(bids.get(8)==p1.bid) {
+		if(bids.get(7)==p1.bid) {
 			return p1;
 		}
-		else if(bids.get(8)==p2.bid) {
+		else if(bids.get(7)==p2.bid) {
 			return p2;
 		}
-		else if(bids.get(8)==p3.bid) {
+		else if(bids.get(7)==p3.bid) {
 			return p3;
 		}
-		else if(bids.get(8)==p4.bid) {
+		else if(bids.get(7)==p4.bid) {
 			return p4;
 		}
-		else if(bids.get(8)==p5.bid) {
+		else if(bids.get(7)==p5.bid) {
 			return p5;
 		}
-		else if(bids.get(8)==p6.bid) {
+		else if(bids.get(7)==p6.bid) {
 			return p6;
 		}
-		else if(bids.get(8)==p7.bid) {
+		else if(bids.get(7)==p7.bid) {
 			return p7;
 		}
 		else {

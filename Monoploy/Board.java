@@ -10,6 +10,8 @@ public class Board {
 	public BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	public Banker banker = new Banker();
 	public BoardSpace space = new BoardSpace();
+	ChanceCard chanceCard =new ChanceCard();
+	CommunityChest communityCard =new CommunityChest();
 	Piece token = new Piece();
 	public Player p1 = new Player();
 	public Player p2 = new Player();
@@ -24,6 +26,9 @@ public class Board {
 
 	public void boardSetUp(int numberPlayers) throws IOException {
 		setUpPlayers(numberPlayers);
+		banker.propertiesToBanker();
+		chanceCard.setCards();
+		communityCard.setCards();
 		space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
 		orderOfPlay(numberPlayers);
 		System.out.println("Turn Order is as Follows: ");
@@ -487,7 +492,7 @@ public class Board {
 		return pWin;
 	}
 
-	public static int promptForRandom(int max, int min) {
+	public int promptForRandom(int max, int min) {
 		Random rando = new Random();
 		int rand = rando.nextInt(max - min + 1) + min;
 		return rand;

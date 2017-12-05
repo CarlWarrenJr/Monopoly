@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 public class Monopoly_game {
 	public static void main(String[] args) throws IOException {
 		Board bdw = new Board();
-		ChanceCard chanceCard =new ChanceCard();
-		CommunityChest communityCard =new CommunityChest();
+		
+		
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String ageResponse;
 		do {
@@ -28,9 +28,9 @@ public class Monopoly_game {
 						continue;
 					}
 						validPlayer = true;
-						chanceCard.setCards();
+						
 						System.out.println();
-						communityCard.setCards();
+						
 						System.out.println();
 						bdw.boardSetUp(numberPlayers);
 						boolean JPMorgan = false;

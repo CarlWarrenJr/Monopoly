@@ -92,7 +92,6 @@ public class BoardSpace {
 			}
 		} else if (space == 10) {
 			System.out.print(player.getName() + "'s current space is the JAIL:");
-			player.inJail = true;
 			if (player.inJail == true) {
 				System.out.print(" IN JAIL!");
 				int jail = bd.promptForInt(jailMenu, 1, 5);
@@ -236,8 +235,8 @@ public class BoardSpace {
 		if (response.equalsIgnoreCase("y") || response.equalsIgnoreCase("yes")) {
 			if (player.bal >= cost) {
 				player.bal -= cost;
-				player.ownedProperties.add("Mediterranean Avenue");
-				banker.properties.remove("Mediterranean Avenue");
+				player.ownedProperties.add(proprty);
+				banker.buyPropertyFromBank(proprty);
 			} else {
 				do {
 					System.out.println("Do you want to mortgage/demolish to get this property");

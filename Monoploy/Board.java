@@ -675,7 +675,110 @@ public class Board {
 		}
 		return returnValue;
 	}
-	public void trade(Player currentPlayer) {
-		System.out.println(currentPlayer.getName()+" who do you want to trade with.");
+	public void trade(Player currentPlayer) throws IOException {
+		String whom="";
+		String yN="";
+		Player toTrade=null;
+		ArrayList<String> tempProperties=new ArrayList<>();
+		ArrayList<String> tempProperties2=new ArrayList<>();
+		boolean wantToTrade=false;
+		do {
+		System.out.println(currentPlayer.getName()+" who do you want to trade with?");
+		whom=in.readLine();
+		}while(!(whom.equalsIgnoreCase(p1.getName())||whom.equalsIgnoreCase(p2.getName())||whom.equalsIgnoreCase(p3.getName())||whom.equalsIgnoreCase(p4.getName())
+				||whom.equalsIgnoreCase(p5.getName())||whom.equalsIgnoreCase(p6.getName())||whom.equalsIgnoreCase(p7.getName())||whom.equalsIgnoreCase(p8.getName()))
+				&&!whom.equalsIgnoreCase(currentPlayer.getName())&&!whom.isEmpty());
+		if(whom.equalsIgnoreCase(p1.getName())) {
+			do {
+			System.out.println(p1.getName()+" do you want to trade with "+currentPlayer.getName());
+			yN=in.readLine();
+			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
+			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
+				wantToTrade=true;
+				toTrade=p1;
+			}
+		}
+		else if(whom.equalsIgnoreCase(p2.getName())) {
+			do {
+			System.out.println(p2.getName()+" do you want to trade with "+currentPlayer.getName());
+			yN=in.readLine();
+			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
+			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
+				wantToTrade=true;
+				toTrade=p2;
+			}
+		}
+		else if(whom.equalsIgnoreCase(p3.getName())) {
+			do {
+			System.out.println(p3.getName()+" do you want to trade with "+currentPlayer.getName());
+			yN=in.readLine();
+			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
+			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
+				wantToTrade=true;
+				toTrade=p3;
+			}
+		}
+		else if(whom.equalsIgnoreCase(p4.getName())) {
+			do {
+			System.out.println(p4.getName()+" do you want to trade with "+currentPlayer.getName());
+			yN=in.readLine();
+			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
+			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
+				wantToTrade=true;
+				toTrade=p4;
+			}
+		}
+		else if(whom.equalsIgnoreCase(p5.getName())) {
+			do {
+			System.out.println(p5.getName()+" do you want to trade with "+currentPlayer.getName());
+			yN=in.readLine();
+			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
+			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
+				wantToTrade=true;
+				toTrade=p5;
+			}
+		}
+		else if(whom.equalsIgnoreCase(p6.getName())) {
+			do {
+			System.out.println(p6.getName()+" do you want to trade with "+currentPlayer.getName());
+			yN=in.readLine();
+			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
+			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
+				wantToTrade=true;
+				toTrade=p6;
+			}
+		}
+		else if(whom.equalsIgnoreCase(p7.getName())) {
+			do {
+			System.out.println(p7.getName()+" do you want to trade with "+currentPlayer.getName());
+			yN=in.readLine();
+			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
+			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
+				wantToTrade=true;
+				toTrade=p7;
+			}
+		}
+		else if(whom.equalsIgnoreCase(p8.getName())) {
+			do {
+			System.out.println(p8.getName()+" do you want to trade with "+currentPlayer.getName());
+			yN=in.readLine();
+			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
+			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
+				wantToTrade=true;
+				toTrade=p8;
+			}
+		}
+		if(wantToTrade) {
+			for(int i=0;i<currentPlayer.ownedProperties.size();i++) {
+				System.out.println(currentPlayer.getName()+" you have "+currentPlayer.ownedProperties.get(i));
+			}
+			for(int i=0;i<toTrade.ownedProperties.size();i++) {
+				System.out.println(toTrade.getName()+" has "+currentPlayer.ownedProperties.get(i));
+			}
+		}
+		boolean isThatAll=false;
+		while(!isThatAll) {
+		System.out.println(currentPlayer.getName()+" what do you want? (one at a time) ");
+		}
 	}
 }

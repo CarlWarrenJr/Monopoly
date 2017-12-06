@@ -20,25 +20,34 @@ public class Board {
 	public Player p7 = new Player();
 	public Player p8 = new Player();
 	private ArrayList<String> tunOder = new ArrayList<>();
-	private String Menu = "What would you Like to do? \n1: Roll Dice 2: Trade with another 3: Build Houses/Hotels 4: Mortgage a Property";
+	private String Menu = "What would you Like to do? \n1: Roll Dice 2: Trade with another 3: Build Houses/Hotels 4: Mortgage a Property 5: View Owned Properties";
 
 	public void boardSetUp(int numberPlayers) throws IOException {
-		setUpPlayers(numberPlayers);
-		banker.propertiesToBanker();
-		space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
-		orderOfPlay(numberPlayers);
-		System.out.println("Turn Order is as Follows: ");
-		String kimp = p1.getName() + ":" + p1.getToken();
-		if (tunOder.get(0).matches(kimp)) {
-			tunOder.remove(null);
+		boolean validTurns = false;
+			setUpPlayers(numberPlayers);
+			banker.propertiesToBanker();
+			space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
+			while (validTurns == false) {
+				try {
+			orderOfPlay(numberPlayers);
+			System.out.println("Turn Order is as Follows: ");
+			String kimp = p1.getName() + ":" + p1.getToken();
+			if (tunOder.get(0).matches(kimp)) {
+				tunOder.remove(null);
+			}
+			if (numberPlayers == 2 && !(tunOder.get(0).matches(kimp))) {
+				tunOder.remove(1);
+			}
+			for (int i = 0; i < numberPlayers; i++) {
+				System.out.println(tunOder.get(i));
+			}
+			space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
+			validTurns = true;
+				}
+				 catch(IndexOutOfBoundsException ex) {
+					 continue;
+				 }
 		}
-		if (numberPlayers == 2 && !(tunOder.get(0).matches(kimp))) {
-			tunOder.remove(1);
-		}
-		for (int i = 0; i < numberPlayers; i++) {
-			System.out.println(tunOder.get(i));
-		}
-		space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
 	}
 
 	private void setUpPlayers(int numberPlayers) throws IOException {
@@ -534,17 +543,6 @@ public class Board {
 	public boolean takeTurn(int numberPlayers) throws IOException {
 		boolean winner = checkWin();
 		Player cplayer = p1;
-
-		boolean bankrupt = isBankrupt(cplayer);
-		if (bankrupt) {
-			tunOder.remove(cplayer.getName() + ":" + cplayer.getToken());
-			if (tunOder.size() == 1) {
-				System.out.println(tunOder.get(0)+" is the winner");
-				
-				return true;
-			}
-		}
-
 		for (int i = 0; i < numberPlayers; i++) {
 			String cuPlayer = tunOder.get(i);
 			System.out.println("It is your turn: " + cuPlayer);
@@ -565,7 +563,6 @@ public class Board {
 			} else if (cuPlayer.equalsIgnoreCase(p8.getName() + ":" + p8.getToken())) {
 				cplayer = p8;
 			}
-
 			boolean diceRolled = false;
 			int menuSelect;
 			int currentSpace = 0;
@@ -602,21 +599,10 @@ public class Board {
 
 				}
 			}
-
 		}
 
 		return winner;
 
-	}
-
-	private boolean isBankrupt(Player cplayer) {
-		if (cplayer.bal == 0 && cplayer.ownedProperties.isEmpty()) {
-			cplayer.bankrupt = true;
-			System.out.println(cplayer.getName() + " is bankrupt");
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	private boolean checkWin() {
@@ -779,6 +765,16 @@ public class Board {
 		boolean isThatAll=false;
 		while(!isThatAll) {
 		System.out.println(currentPlayer.getName()+" what do you want? (one at a time) ");
+		}
+	}
+	
+	private boolean isBankrupt(Player cplayer) {
+		if (cplayer.bal == 0 && cplayer.ownedProperties.isEmpty()) {
+			cplayer.bankrupt = true;
+			System.out.println(cplayer.getName() + " is bankrupt");
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

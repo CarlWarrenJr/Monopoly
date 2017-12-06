@@ -35,8 +35,7 @@ public class Monopoly_game {
 						bdw.boardSetUp(numberPlayers);
 						boolean JPMorgan = false;
 						while (JPMorgan == false) {
-						JPMorgan=bdw.takeTurn(numberPlayers);
-						
+						JPMorgan = bdw.takeTurn(numberPlayers);
 						}
 				} catch (NumberFormatException ex) {
 					System.out.println("Enter a Valid Integer between 2 and 8.");

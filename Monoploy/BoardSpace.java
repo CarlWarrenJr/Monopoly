@@ -10,7 +10,7 @@ import java.util.Random;
 public class BoardSpace {
 	ChanceCard chance = new ChanceCard();
 	CommunityChest chest = new CommunityChest();
-	private boolean chanceDraw = true;
+	private boolean taxation = true;
 	private String jailMenu = "You are in Jail! These are your options:\n1:Try to Roll For Doubles 2.Trade with Others Free Card 3: Build on Propeties\n4: Morgage Property 5:Pay $50 Fine";
 	public BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
@@ -50,6 +50,7 @@ public class BoardSpace {
 
 	public void spaceName(Player player, int space, Banker banker, Player p1, Player p2, Player p3, Player p4,
 			Player p5, Player p6, Player p7, Player p8, ArrayList<String> turnOrder) throws IOException {
+		boolean test;
 		if (space == 0) {
 			if (player.startedOn == false) {
 				player.startedOn = true;
@@ -65,26 +66,46 @@ public class BoardSpace {
 		} else if (space == 1) {
 			System.out.println(player.getName() + "'s current space is the Mediterranean Avenue!");
 			if (banker.properties.contains("Mediterranean Avenue")) {
-				buyit("Mediterranean Avenue", player, banker);
+				buyit("Mediterranean Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 2) {
-			if (player.startedOn = false) {
+			if (player.startedOn == false) {
 				player.startedOn = true;
 				System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+				chest.draw(player, space, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+				space = spaceFind(player);
+				if (space == 10) {
+					System.out.println(player.getName() + "'s current space is the JAIL: IN JAIL!");
+				} else {
+					if (space == 2) {
+						System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+					}
+					else {
+					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					}
+				}
 			} else {
-				System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+				System.out.println(player.getName() + "'s current space is the CHANCE!");
 				player.startedOn = false;
 			}
-
 		} else if (space == 3) {
 			System.out.println(player.getName() + "'s current space is the BALTIC AVENUE!");
 			if (banker.properties.contains("Baltic Avenue")) {
-				buyit("Baltic Avenue", player, banker);
+				buyit("Baltic Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 4) {
 			if (player.startedOn = false) {
 				player.startedOn = true;
 				System.out.println(player.getName() + "'s current space is the INCOME TAX!");
+				int tax = promptForInt("Do you wish to pay 1: $200 or 2: 10% of Your Total Worth", 1, 2);
+				if (tax == 1) {
+					player.bal -= 200;
+					System.out.println(player.getName() + ":" + player.getToken() + "'s new balance is: " + player.bal);
+				} else {
+					
+					int taxation = player.bal ;
+					// add bal + morages worth all times .10
+				}
 			} else {
 				System.out.println(player.getName() + "'s current space is the INCOME TAX!");
 				player.startedOn = false;
@@ -92,31 +113,42 @@ public class BoardSpace {
 		} else if (space == 5) {
 			System.out.println(player.getName() + "'s current space is the READING RAILROAD!");
 			if (banker.properties.contains("Reading Railroad")) {
-				buyit("Reading Railroad", player, banker);
+				buyit("Reading Railroad", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 6) {
 			System.out.println(player.getName() + "'s current space is the ORIENTAL AVENUE!");
 			if (banker.properties.contains("Oriental Avenue")) {
-				buyit("Oriental Avenue", player, banker);
+				buyit("Oriental Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 7) {
-			if (chanceDraw == true) {
-				chanceDraw = false;
-				chance.draw(player, space, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+			if (player.startedOn == false) {
+				player.startedOn = true;
 				System.out.println(player.getName() + "'s current space is the CHANCE!");
+				chance.draw(player, space, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+				space = spaceFind(player);
+				if (space == 10) {
+					System.out.println(player.getName() + "'s current space is the JAIL: IN JAIL!");
+				} else {
+					if (space == 7) {
+						System.out.println(player.getName() + "'s current space is the CHANCE!");
+					}
+					else {
+					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					}
+				}
 			} else {
 				System.out.println(player.getName() + "'s current space is the CHANCE!");
-				chanceDraw = true;
+				player.startedOn = false;
 			}
 		} else if (space == 8) {
 			System.out.println(player.getName() + "'s current space is the VERMONT AVENUE!");
 			if (banker.properties.contains("Vermont Avenue")) {
-				buyit("Vermont Avenue", player, banker);
+				buyit("Vermont Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 9) {
 			System.out.println(player.getName() + "'s current space is the CONNETICUT AVENUE!");
 			if (banker.properties.contains("Conneticut Avenue")) {
-				buyit("Conneticut Avenue", player, banker);
+				buyit("Conneticut Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 10) {
 			System.out.print(player.getName() + "'s current space is the JAIL:");
@@ -147,101 +179,124 @@ public class BoardSpace {
 		} else if (space == 11) {
 			System.out.println(player.getName() + "'s current space is the ST. CHARLES PLACE!");
 			if (banker.properties.contains("St. Charles Place")) {
-				buyit("St. Charles Place", player, banker);
+				buyit("St. Charles Place", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 12) {
 			System.out.println(player.getName() + "'s current space is the ELECTRIC COMPANY!");
 			if (banker.properties.contains("Electric Company")) {
-				buyit("Electric Company", player, banker);
+				buyit("Electric Company", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 13) {
 			System.out.println(player.getName() + "'s current space is the STATES AVENUE!");
 			if (banker.properties.contains("States Avenue")) {
-				buyit("States Avenue", player, banker);
+				buyit("States Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 14) {
 			System.out.println(player.getName() + "'s current space is the VIRGINIA AVENUE!");
 			if (banker.properties.contains("Virginia Avenue")) {
-				buyit("Virginia Avenue", player, banker);
+				buyit("Virginia Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 15) {
 			System.out.println(player.getName() + "'s current space is the PENNSYLVANIA RAILROAD!");
 			if (banker.properties.contains("Pennsylvania Railroad")) {
-				buyit("Pennsylvania Railroad", player, banker);
+				buyit("Pennsylvania Railroad", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 16) {
 			System.out.println(player.getName() + "'s current space is the ST. JAMES PLACE!");
 			if (banker.properties.contains("St. James Place")) {
-				buyit("St. James Place", player, banker);
+				buyit("St. James Place", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 17) {
-			if (player.startedOn = false) {
+			if (player.startedOn == false) {
 				player.startedOn = true;
 				System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+				chest.draw(player, space, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+				space = spaceFind(player);
+				if (space == 10) {
+					System.out.println(player.getName() + "'s current space is the JAIL: IN JAIL!");
+				} else {
+					if (space == 17) {
+						System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+					}
+					else {
+					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					}
+				}
 			} else {
-				System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+				System.out.println(player.getName() + "'s current space is the CHANCE!");
 				player.startedOn = false;
 			}
 		} else if (space == 18) {
-			System.out.println(player.getName() + "'s current space is the TENNESEE AVENUE!");
-			if (banker.properties.contains("Tennesee Avenue")) {
-				buyit("Tennesee Avenue", player, banker);
+			System.out.println(player.getName() + "'s current space is the TENNESSEE AVENEUE!");
+			if (banker.properties.contains("Tennessee Avenue")) {
+				buyit("Tennessee Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 19) {
 			System.out.println(player.getName() + "'s current space is the NEW YORK AVENUE!");
 			if (banker.properties.contains("New York Avenue")) {
-				buyit("New York Avenue", player, banker);
+				buyit("New York Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 20) {
 			System.out.println(player.getName() + "'s current space is the FREE PARKING!");
 		} else if (space == 21) {
 			System.out.println(player.getName() + "'s current space is the KENTUKY AVENUE!");
 			if (banker.properties.contains("Kentucky Avenue")) {
-				buyit("Kentucky Avenue", player, banker);
+				buyit("Kentucky Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 22) {
-			if (chanceDraw == true) {
-				chanceDraw = false;
-				chance.draw(player, space, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+			if (player.startedOn == false) {
+				player.startedOn = true;
 				System.out.println(player.getName() + "'s current space is the CHANCE!");
+				chance.draw(player, space, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+				space = spaceFind(player);
+				if (space == 10) {
+					System.out.println(player.getName() + "'s current space is the JAIL: IN JAIL!");
+				} else {
+					if (space == 22) {
+						System.out.println(player.getName() + "'s current space is the CHANCE!");
+					}
+					else {
+					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					}
+				}
 			} else {
 				System.out.println(player.getName() + "'s current space is the CHANCE!");
-				chanceDraw = true;
+				player.startedOn = false;
 			}
 		} else if (space == 23) {
 			System.out.println(player.getName() + "'s current space is the INDIANA AVENUE!");
 			if (banker.properties.contains("Indiana Avenue")) {
-				buyit("Indiana Avenue", player, banker);
+				buyit("Indiana Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 24) {
 			System.out.println(player.getName() + "'s current space is the ILLINOIS Avenue!");
 			if (banker.properties.contains("Illinois Avenue")) {
-				buyit("Illinois Avenue", player, banker);
+				buyit("Illinois Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 25) {
 			System.out.println(player.getName() + "'s current space is the B&O RAILROAD!");
 			if (banker.properties.contains("B&O Railroad")) {
-				buyit("B&O Railroad", player, banker);
+				buyit("B&O Railroad", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 26) {
 			System.out.println(player.getName() + "'s current space is the ATLANTIC AVENUE!");
 			if (banker.properties.contains("Atlantic Avenue")) {
-				buyit("Atlantic Avenue", player, banker);
+				buyit("Atlantic Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 27) {
 			System.out.println(player.getName() + "'s current space is the VENTNOR AVENUE!");
 			if (banker.properties.contains("Ventnor Avenue")) {
-				buyit("Ventnor Avenue", player, banker);
+				buyit("Ventnor Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 28) {
 			System.out.println(player.getName() + "'s current space is the WATER WORKS!");
 			if (banker.properties.contains("Water Works")) {
-				buyit("Water Works", player, banker);
+				buyit("Water Works", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 29) {
 			System.out.println(player.getName() + "'s current space is the MARVIN GARDENS!");
 			if (banker.properties.contains("Marvin Gardens")) {
-				buyit("Marvin Gardens", player, banker);
+				buyit("Marvin Gardens", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 30) {
 			System.out.println(player.getName() + "'s current space is the GO TO JAIL!");
@@ -252,44 +307,67 @@ public class BoardSpace {
 		} else if (space == 31) {
 			System.out.println(player.getName() + "'s current space is the PACIFIC AVENUE!");
 			if (banker.properties.contains("Pacific Avenue")) {
-				buyit("Pacific Avenue", player, banker);
+				buyit("Pacific Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 32) {
 			System.out.println(player.getName() + "'s current space is the NORTH CAROLINA AVENUE!");
 			if (banker.properties.contains("North Carolina Avenue")) {
-				buyit("North Carolina Avenue", player, banker);
+				buyit("North Carolina Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 33) {
-			if (player.startedOn = false) {
+			if (player.startedOn == false) {
 				player.startedOn = true;
 				System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+				chest.draw(player, space, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+				space = spaceFind(player);
+				if (space == 10) {
+					System.out.println(player.getName() + "'s current space is the JAIL: IN JAIL!");
+				} else {
+					if (space == 33) {
+						System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+					}
+					else {
+					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					}
+				}
 			} else {
-				System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
+				System.out.println(player.getName() + "'s current space is the CHANCE!");
 				player.startedOn = false;
 			}
 		} else if (space == 34) {
 			System.out.println(player.getName() + "'s current space is the PENNSYLVANIA AVENUE!");
 			if (banker.properties.contains("Pennsylvania Avenue")) {
-				buyit("Pennsylvania Avenue", player, banker);
+				buyit("Pennsylvania Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 35) {
 			System.out.println(player.getName() + "'s current space is the SHORT LINE!");
 			if (banker.properties.contains("Short Line")) {
-				buyit("Short Line", player, banker);
+				buyit("Short Line", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 36) {
-			if (chanceDraw == true) {
-				chanceDraw = false;
-				chance.draw(player, space, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+			if (player.startedOn == false) {
+				player.startedOn = true;
 				System.out.println(player.getName() + "'s current space is the CHANCE!");
+				chance.draw(player, space, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+				space = spaceFind(player);
+				if (space == 10) {
+					System.out.println(player.getName() + "'s current space is the JAIL: IN JAIL!");
+				} else {
+					if (space == 36) {
+						System.out.println(player.getName() + "'s current space is the CHANCE!");
+					}
+					else {
+					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					}
+				}
 			} else {
 				System.out.println(player.getName() + "'s current space is the CHANCE!");
-				chanceDraw = true;
+				player.startedOn = false;
 			}
 		} else if (space == 37) {
 			System.out.println(player.getName() + "'s current space is the PARK PLACE!");
 			if (banker.properties.contains("Park Place")) {
-				buyit("Park Place", player, banker);
+				buyit("Park Place", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 38) {
 			if (player.startedOn = false) {
@@ -302,12 +380,13 @@ public class BoardSpace {
 		} else if (space == 39) {
 			System.out.println(player.getName() + "'s current space is the BOARDWALK!");
 			if (banker.properties.contains("Board Walk")) {
-				buyit("Board Walk", player, banker);
+				buyit("Board Walk", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		}
 	}
 
-	private void buyit(String proprty, Player player, Banker banker) throws IOException {
+	private void buyit(String proprty, Player player, Banker banker, Player p1, Player p2, Player p3, Player p4,
+			Player p5, Player p6, Player p7, Player p8, int numberPlayers) throws IOException {
 		String response = "";
 		String notEnoughMoney = "";
 		int cost = price(proprty);
@@ -335,8 +414,11 @@ public class BoardSpace {
 				}
 			}
 		} else {
-			// auction
+			Player tempPlayer = banker.auctionHouse(player, p1, p2, p3, p4, p5, p6, p7, p8, numberPlayers);
+			banker.buyPropertyFromBank(proprty);
+			tempPlayer.ownedProperties.add(proprty);
 		}
+		System.out.println(player.getName() + ":" + player.getToken() + "'s New balance is: " + player.bal);
 	}
 
 	private int price(String propertyCost) {
@@ -435,7 +517,9 @@ public class BoardSpace {
 			int hi = player.diceRoll + player.diceRoll2 + space;
 			if (hi > 39) {
 				space -= 40;
-				passGo(player);
+				if (space != 0) {
+					passGo(player);
+				}
 			}
 			for (int i = 0; i < player.space.length; i++) {
 				player.space[i] = "1";

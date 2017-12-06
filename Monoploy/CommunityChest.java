@@ -50,28 +50,31 @@ public class CommunityChest {
 		String drawnCard = deck.remove(0);
 		System.out.println(drawnCard);
 		System.out.println();
-		int moveTo;
 		switch (drawnCard) {
 		case ("Advance to Go (Collect $200)"):
-			moveTo = 0;
-			move(current, moveTo);
+			space = 0;
+			move(current, space);
 			current.bal += 200;
+			System.out.println(current.bal);
 			break;
 		case ("Bank error in your favor—Collect $200"):
 			current.bal += 200;
+		System.out.println(current.bal);
 			break;
 		case ("Doctor's fee—Pay $50"):
 			current.bal -= 50;
+		System.out.println(current.bal);
 			break;
 		case ("From sale of stock you get $50"):
 			current.bal += 50;
+		System.out.println(current.bal);
 			break;
 		case ("Get Out of Jail Free"):
 			current.ownedProperties.add("Get Out of Jail Free");
 			break;
 		case ("Go to Jail–Go directly to jail–Do not pass Go–Do not collect $200"):
-			moveTo = 10;
-			move(current, moveTo);
+			space = 10;
+			move(current, space);
 			current.inJail = true;
 			break;
 		case ("Grand Opera Night—Collect $50 from every player for opening night seats"):
@@ -238,36 +241,46 @@ public class CommunityChest {
 					goThrough++;
 				}
 			}
+			System.out.println(current.bal);
 			break;
 		case ("Holiday Fund matures—Receive $100"):
 			current.bal+=100;
+		System.out.println(current.bal);
 			break;
 		case ("Income tax refund–Collect $20"):
 			current.bal+=20;
+		System.out.println(current.bal);
 			break;
 		case ("It is your birthday—Collect $10"):
 			current.bal+=10;
+		System.out.println(current.bal);
 			break;
 		case ("Life insurance matures–Collect $100"):
 			current.bal+=100;
+		System.out.println(current.bal);
 			break;
 		case ("Pay hospital fees of $100"):
 			current.bal-=100;
+		System.out.println(current.bal);
 			break;
 		case ("Pay school fees of $150"):
 			current.bal-=150;
+		System.out.println(current.bal);
 			break;
 		case ("Receive $25 consultancy fee"):
 			current.bal+=25;
+		System.out.println(current.bal);
 			break;
 		case ("You are assessed for street repairs–$40 per house–$115 per hotel"):
 			//come back later
 			break;
 		case ("You have won second prize in a beauty contest–Collect $10"):
 			current.bal+=10;
+		System.out.println(current.bal);
 			break;
 		case ("You inherit $100"):
 			current.bal+=100;
+		System.out.println(current.bal);
 			break;
 		}
 		/*
@@ -275,11 +288,11 @@ public class CommunityChest {
 		 */
 	}
 
-	private void move(Player current, int space) {
+	private void move(Player current, int spacer) {
 		for (int i = 0; i < current.space.length; i++) {
 			current.space[i] = "1";
 		}
-		current.space[space] = "0";
+		current.space[spacer] = "0";
 
 	}
 

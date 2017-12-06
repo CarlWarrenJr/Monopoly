@@ -48,69 +48,74 @@ public class ChanceCard {
 		deck.remove(0);
 		System.out.println(drawnCard);
 		System.out.println();
-		int moveTo;
 		switch (drawnCard) {
 		case ("Advance to Go (Collect $200)"):
 			// move current to go and add 200 to bal
-			moveTo = 0;
-			move(current, moveTo);
+			space = 0;
+			move(current, space);
 			current.bal += 200;
+			System.out.println(current.bal);
 			break;
 		case ("Advance to Illinois AvevenueIf you pass Go, collect $200"):
 			// if current space is after illinois ave set space to illinois and add 200
 			if (space>24) {
 				current.bal += 200;
+				System.out.println(current.bal);
 			}
-			moveTo = 24;
-			move(current, moveTo);
+			space = 24;
+			move(current, space);
 			break;
 		case ("Advance to St. Charles Place – If you pass Go, collect $200"):
 			if (space>11) {
 				current.bal += 200;
+				System.out.println(current.bal);
 			}
-			moveTo = 11;
-			move(current, moveTo);
+			space = 11;
+			move(current, space);
 			break;
 		case ("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times the amount thrown."):
 			if (space>28&&space<12) {
 				current.bal += 200;
-				moveTo = 12;
+				space = 12;
+				System.out.println(current.bal);
 			}
 			else {
-				moveTo=28;
+				space=28;
 			}
 			
-			move(current, moveTo);
+			move(current, space);
 			break;
 		case ("Advance token to the nearest Railroad and pay owner twice the rental to which he/she is otherwise entitled. If Railroad is unowned, you may buy it from the Bank."):
 			if (space>35&&space<5) {
 				current.bal += 200;
-				moveTo = 5;
+				System.out.println(current.bal);
+				space = 5;
 			}
 			else if(space>5&&space<15) {
-				moveTo=15;
+				space=15;
 			}
 			else if(space>15&&space<25) {
-				moveTo=25;
+				space=25;
 			}
 			else {
-				moveTo=35;
+				space=35;
 			}			
-			move(current, moveTo);
+			move(current, space);
 			break;
 		case ("Bank pays you dividend of $50"):
 			current.bal+=50;
+		System.out.println(current.bal);
 		break;
 		case ("Get Out of Jail Free"):
 			current.ownedProperties.add("Get Out of Jail Free");
 		break;
 		case ("Go Back 3 Spaces"):
-			moveTo=space-3;
-			move(current, moveTo);
+			space=space-3;
+			move(current, space);
 			break;
 		case ("Go to JailGo directly to Jail Do not pass Go, do not collect $200"):
-			moveTo=10;
-		move(current, moveTo);
+			space=10;
+		move(current, space);
 		current.inJail=true;
 		break;
 		case ("Make general repairs on all your propertyFor each house pay $25–For each hotel $100"):
@@ -118,25 +123,27 @@ public class ChanceCard {
 			break;
 		case ("Pay poor tax of $15"):
 			current.bal-=15;
+		System.out.println(current.bal);
 		break;
 		case ("Take a trip to Reading Railroad–If you pass Go, collect $200"):
 			if(space>5) {
 				current.bal+=200;
+				System.out.println(current.bal);
 			}
-			moveTo=5;
-		move(current, moveTo);
+			space=5;
+		move(current, space);
 		break;
 		case ("Take a walk on the BoardwalkAdvance token to Boardwalk"):
-			moveTo=39;
-		move(current, moveTo);
+			space=39;
+		move(current, space);
 		break;
 		case ("You have been elected Chairman of the Board–Pay each player $50"):
-			for(int i=0;i<turnOrder.size();i++) {
+			for(int i=0;i<turnOrder.size() - 1;i++) {
 				current.bal-=50;
 			}
 		int goThrough=2;
 		if(current.getName().equals(p1.getName())) {
-			for(int i=0;i<turnOrder.size()-1;i++) {
+			for(int i=0;i<turnOrder.size() - 1;i++) {
 			if(goThrough==2) {
 			p2.bal+=50;
 			}
@@ -343,12 +350,15 @@ public class ChanceCard {
 			goThrough++;
 			}
 		}
+		System.out.println(current.bal);
 			break;
 		case ("Your building and loan maturesCollect $150"):
 			current.bal+=150;
+		System.out.println(current.bal);
 			break;
 		case ("You have won a crossword competitionCollect $100"):
 			current.bal+=150;
+		System.out.println(current.bal);
 			break;
 		}
 		/*
@@ -361,6 +371,5 @@ public class ChanceCard {
 			current.space[i] = "1";
 		}
 		current.space[space] = "0";
-
 	}
 }

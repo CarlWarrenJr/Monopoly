@@ -116,7 +116,7 @@ public class Banker {
 		bids.add(p7.bid);
 		bids.add(p8.bid);
 		compare(bids,numberPlayers);
-		if(p8.bid!=0&&p7.bid!=0&&p6.bid!=0&&p5.bid!=0&&p4.bid!=0&&p3.bid!=0&&p2.bid!=0&&p1.bid!=0) {
+		if(p8.bid!=0||p7.bid!=0||p6.bid!=0||p5.bid!=0||p4.bid!=0||p3.bid!=0||p2.bid!=0||p1.bid!=0) {
 		if(bids.get(7)==p1.bid) {
 			return p1;
 		}

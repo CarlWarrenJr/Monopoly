@@ -5,7 +5,9 @@ import java.util.ArrayList;
 public class Player {
 	public boolean inJail = false;
 	public boolean startedOn = true;
-	boolean firstGo = true;
+	public boolean firstGo = true;
+	public boolean win=false;
+	public boolean bankrupt=false;
 	private String token;
 	private String name;
 	public int diceRoll = 0;
@@ -19,7 +21,7 @@ public class Player {
 	public ArrayList<String> MorgegedPrpoerties = new ArrayList<>();
 	public ArrayList<String> other= new ArrayList<>();
 	public int bid=0;
-	public boolean win=false;
+	
 	public void setName(String name) {
 		this.name = name;
 	}

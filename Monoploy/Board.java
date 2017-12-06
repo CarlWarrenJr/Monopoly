@@ -534,6 +534,17 @@ public class Board {
 	public boolean takeTurn(int numberPlayers) throws IOException {
 		boolean winner = checkWin();
 		Player cplayer = p1;
+
+		boolean bankrupt = isBankrupt(cplayer);
+		if (bankrupt) {
+			tunOder.remove(cplayer.getName() + ":" + cplayer.getToken());
+			if (tunOder.size() == 1) {
+				System.out.println(tunOder.get(0)+" is the winner");
+				
+				return true;
+			}
+		}
+
 		for (int i = 0; i < numberPlayers; i++) {
 			String cuPlayer = tunOder.get(i);
 			System.out.println("It is your turn: " + cuPlayer);
@@ -554,7 +565,7 @@ public class Board {
 			} else if (cuPlayer.equalsIgnoreCase(p8.getName() + ":" + p8.getToken())) {
 				cplayer = p8;
 			}
-			boolean bankrupt=isBankrupt(cplayer,tunOder);
+
 			boolean diceRolled = false;
 			int menuSelect;
 			int currentSpace = 0;
@@ -591,52 +602,55 @@ public class Board {
 
 				}
 			}
+
 		}
 
 		return winner;
 
 	}
 
-	private boolean isBankrupt(Player cplayer, ArrayList<String> turnOrder) {
-		if(cplayer.bal==0&&cplayer.ownedProperties.isEmpty()) {
-			cplayer.bankrupt=true;
-			turnOrder.remove(cplayer);
+	private boolean isBankrupt(Player cplayer) {
+		if (cplayer.bal == 0 && cplayer.ownedProperties.isEmpty()) {
+			cplayer.bankrupt = true;
+			System.out.println(cplayer.getName() + " is bankrupt");
+			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	private boolean checkWin() {
 		boolean winner = false;
 		if ((p1.bal != 0 && p2.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
-				&& p8.bal == 0)&&p1.ownedProperties.isEmpty()) {
+				&& p8.bal == 0) && p1.ownedProperties.isEmpty()) {
 			p1.win = true;
 			winner = p1.win;
-		} else if ((p2.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
-				&& p8.bal == 0)&&p2.ownedProperties.isEmpty()) {
+		} else if ((p2.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
+				&& p7.bal == 0 && p8.bal == 0) && p2.ownedProperties.isEmpty()) {
 			p2.win = true;
 			winner = p2.win;
-		} else if ((p3.bal != 0 && p1.bal == 0 && p2.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
-				&& p8.bal == 0)&&p3.ownedProperties.isEmpty()) {
+		} else if ((p3.bal != 0 && p1.bal == 0 && p2.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
+				&& p7.bal == 0 && p8.bal == 0) && p3.ownedProperties.isEmpty()) {
 			p3.win = true;
 			winner = p3.win;
-		} else if ((p4.bal != 0 && p1.bal == 0 && p3.bal == 0 && p2.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
-				&& p8.bal == 0)&&p4.ownedProperties.isEmpty()) {
+		} else if ((p4.bal != 0 && p1.bal == 0 && p3.bal == 0 && p2.bal == 0 && p5.bal == 0 && p6.bal == 0
+				&& p7.bal == 0 && p8.bal == 0) && p4.ownedProperties.isEmpty()) {
 			p4.win = true;
 			winner = p4.win;
-		} else if ((p5.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p2.bal == 0 && p6.bal == 0 && p7.bal == 0
-				&& p8.bal == 0)&&p5.ownedProperties.isEmpty()) {
+		} else if ((p5.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p2.bal == 0 && p6.bal == 0
+				&& p7.bal == 0 && p8.bal == 0) && p5.ownedProperties.isEmpty()) {
 			p5.win = true;
 			winner = p5.win;
-		} else if ((p6.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p2.bal == 0 && p7.bal == 0
-				&& p8.bal == 0)&&p6.ownedProperties.isEmpty()) {
+		} else if ((p6.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p2.bal == 0
+				&& p7.bal == 0 && p8.bal == 0) && p6.ownedProperties.isEmpty()) {
 			p6.win = true;
 			winner = p6.win;
-		} else if ((p7.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p2.bal == 0
-				&& p8.bal == 0)&&!p7.ownedProperties.isEmpty()) {
+		} else if ((p7.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
+				&& p2.bal == 0 && p8.bal == 0) && !p7.ownedProperties.isEmpty()) {
 			p7.win = true;
 			winner = p7.win;
-		} else if ((p8.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
-				&& p2.bal == 0)&&p8.ownedProperties.isEmpty()) {
+		} else if ((p8.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
+				&& p7.bal == 0 && p2.bal == 0) && p8.ownedProperties.isEmpty()) {
 			p8.win = true;
 			winner = p8.win;
 		}
@@ -660,5 +674,8 @@ public class Board {
 			}
 		}
 		return returnValue;
+	}
+	public void trade(Player currentPlayer) {
+		System.out.println(currentPlayer.getName()+" who do you want to trade with.");
 	}
 }

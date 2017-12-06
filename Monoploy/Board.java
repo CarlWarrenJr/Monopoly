@@ -554,6 +554,7 @@ public class Board {
 			} else if (cuPlayer.equalsIgnoreCase(p8.getName() + ":" + p8.getToken())) {
 				cplayer = p8;
 			}
+			boolean bankrupt=isBankrupt(cplayer,tunOder);
 			boolean diceRolled = false;
 			int menuSelect;
 			int currentSpace = 0;
@@ -594,6 +595,14 @@ public class Board {
 
 		return winner;
 
+	}
+
+	private boolean isBankrupt(Player cplayer, ArrayList<String> turnOrder) {
+		if(cplayer.bal==0&&cplayer.ownedProperties.isEmpty()) {
+			cplayer.bankrupt=true;
+			turnOrder.remove(cplayer);
+		}
+		return false;
 	}
 
 	private boolean checkWin() {

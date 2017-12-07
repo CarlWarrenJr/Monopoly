@@ -178,4 +178,9 @@ public class Banker {
 		}
 
 	}
+	public void mortgage(Player playr, String property, int price) {
+		playr.MorgegedPrpoerties.add(property);
+		playr.ownedProperties.remove(property);
+		playr.bal+=(price/2);
+	}
 }

@@ -23,6 +23,7 @@ public class Board {
 	private String Menu = "What would you Like to do? \n1: Roll Dice 2: Trade with another 3: Build Houses/Hotels 4: Mortgage a Property 5: View Owned Properties";
 
 	public void boardSetUp(int numberPlayers) throws IOException {
+		int breaker=0;
 		boolean validTurns = false;
 			setUpPlayers(numberPlayers);
 			banker.propertiesToBanker();
@@ -35,6 +36,9 @@ public class Board {
 			if (tunOder.get(0).matches(kimp)) {
 				tunOder.remove(null);
 			}
+			if(breaker>0) {
+				tunOder.remove(1);
+			}
 			if (numberPlayers == 2 && !(tunOder.get(0).matches(kimp))) {
 				tunOder.remove(1);
 			}
@@ -45,6 +49,7 @@ public class Board {
 			validTurns = true;
 				}
 				 catch(IndexOutOfBoundsException ex) {
+					 breaker++;
 					 continue;
 				 }
 		}
@@ -543,6 +548,10 @@ public class Board {
 	public boolean takeTurn(int numberPlayers) throws IOException {
 		boolean winner = checkWin();
 		Player cplayer = p1;
+		cplayer.bankrupt=isBankrupt(cplayer);
+		if(cplayer.bankrupt) {
+		tunOder.remove(cplayer.getName()+":"+cplayer.getToken());
+		}
 		for (int i = 0; i < numberPlayers; i++) {
 			String cuPlayer = tunOder.get(i);
 			System.out.println("It is your turn: " + cuPlayer);
@@ -568,7 +577,7 @@ public class Board {
 			int currentSpace = 0;
 			cplayer.numberOfDoubles = 0;
 			while (diceRolled == false) {
-				menuSelect = promptForInt(Menu, 1, 4);
+				menuSelect = promptForInt(Menu, 1, 5);
 				if (menuSelect == 1) {
 					cplayer.diceRoll = promptForRandom(6, 1);
 					cplayer.diceRoll2 = promptForRandom(6, 1);
@@ -598,6 +607,12 @@ public class Board {
 				} else if (menuSelect == 4) {
 
 				}
+				else if(menuSelect==5) {
+					System.out.print("Owned Properties: ");
+					for(int k=0;k<cplayer.ownedProperties.size();k++) {
+						System.out.println(cplayer.ownedProperties.get(k));
+					}
+				}
 			}
 		}
 
@@ -608,35 +623,51 @@ public class Board {
 	private boolean checkWin() {
 		boolean winner = false;
 		if ((p1.bal != 0 && p2.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
-				&& p8.bal == 0) && p1.ownedProperties.isEmpty()) {
+				&& p8.bal == 0) && !p1.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
+				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
+				&&p8.ownedProperties.isEmpty()) {
 			p1.win = true;
 			winner = p1.win;
 		} else if ((p2.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) && p2.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) &&!p2.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
+				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
+				&&p8.ownedProperties.isEmpty()) {
 			p2.win = true;
 			winner = p2.win;
 		} else if ((p3.bal != 0 && p1.bal == 0 && p2.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) && p3.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) &&!p3.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()
+				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
+				&&p8.ownedProperties.isEmpty()) {
 			p3.win = true;
 			winner = p3.win;
 		} else if ((p4.bal != 0 && p1.bal == 0 && p3.bal == 0 && p2.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) && p4.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) &&!p4.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
+				&&p1.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
+				&&p8.ownedProperties.isEmpty()) {
 			p4.win = true;
 			winner = p4.win;
 		} else if ((p5.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p2.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) && p5.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) &&!p5.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
+				&&p4.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
+				&&p8.ownedProperties.isEmpty()) {
 			p5.win = true;
 			winner = p5.win;
 		} else if ((p6.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p2.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) && p6.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) &&!p6.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
+				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
+				&&p8.ownedProperties.isEmpty()) {
 			p6.win = true;
 			winner = p6.win;
 		} else if ((p7.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p2.bal == 0 && p8.bal == 0) && !p7.ownedProperties.isEmpty()) {
+				&& p2.bal == 0 && p8.bal == 0) && !p7.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
+				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()
+				&&p8.ownedProperties.isEmpty()) {
 			p7.win = true;
 			winner = p7.win;
 		} else if ((p8.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p2.bal == 0) && p8.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p2.bal == 0) && !p8.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
+				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
+				&&p8.ownedProperties.isEmpty()) {
 			p8.win = true;
 			winner = p8.win;
 		}

@@ -23,35 +23,34 @@ public class Board {
 	private String Menu = "What would you Like to do? \n1: Roll Dice 2: Trade with another 3: Build Houses/Hotels 4: Mortgage a Property 5: View Owned Properties";
 
 	public void boardSetUp(int numberPlayers) throws IOException {
-		int breaker=0;
+		int breaker = 0;
 		boolean validTurns = false;
-			setUpPlayers(numberPlayers);
-			banker.propertiesToBanker();
-			space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
-			while (validTurns == false) {
-				try {
-			orderOfPlay(numberPlayers);
-			System.out.println("Turn Order is as Follows: ");
-			String kimp = p1.getName() + ":" + p1.getToken();
-			if (tunOder.get(0).matches(kimp)) {
-				tunOder.remove(null);
-			}
-			if(breaker>0) {
-				tunOder.remove(1);
-			}
-			if (numberPlayers == 2 && !(tunOder.get(0).matches(kimp))) {
-				tunOder.remove(1);
-			}
-			for (int i = 0; i < numberPlayers; i++) {
-				System.out.println(tunOder.get(i));
-			}
-			space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
-			validTurns = true;
+		setUpPlayers(numberPlayers);
+		banker.propertiesToBanker();
+		space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
+		while (validTurns == false) {
+			try {
+				orderOfPlay(numberPlayers);
+				System.out.println("Turn Order is as Follows: ");
+				String kimp = p1.getName() + ":" + p1.getToken();
+				if (tunOder.get(0).matches(kimp)) {
+					tunOder.remove(null);
 				}
-				 catch(IndexOutOfBoundsException ex) {
-					 breaker++;
-					 continue;
-				 }
+				if (breaker > 0) {
+					tunOder.remove(1);
+				}
+				if (numberPlayers == 2 && !(tunOder.get(0).matches(kimp))) {
+					tunOder.remove(1);
+				}
+				for (int i = 0; i < numberPlayers; i++) {
+					System.out.println(tunOder.get(i));
+				}
+				space.spacesInitalize(p1, p2, p3, p4, p5, p6, p7, p8);
+				validTurns = true;
+			} catch (IndexOutOfBoundsException ex) {
+				breaker++;
+				continue;
+			}
 		}
 	}
 
@@ -548,9 +547,9 @@ public class Board {
 	public boolean takeTurn(int numberPlayers) throws IOException {
 		boolean winner = checkWin();
 		Player cplayer = p1;
-		cplayer.bankrupt=isBankrupt(cplayer);
-		if(cplayer.bankrupt) {
-		tunOder.remove(cplayer.getName()+":"+cplayer.getToken());
+		cplayer.bankrupt = isBankrupt(cplayer);
+		if (cplayer.bankrupt) {
+			tunOder.remove(cplayer.getName() + ":" + cplayer.getToken());
 		}
 		for (int i = 0; i < numberPlayers; i++) {
 			String cuPlayer = tunOder.get(i);
@@ -602,14 +601,14 @@ public class Board {
 					}
 				} else if (menuSelect == 2) {
 					System.out.println("Which Player would you like to trade with?\n" + tunOder);
+					trade(cplayer);
 				} else if (menuSelect == 3) {
 
 				} else if (menuSelect == 4) {
 
-				}
-				else if(menuSelect==5) {
+				} else if (menuSelect == 5) {
 					System.out.print("Owned Properties: ");
-					for(int k=0;k<cplayer.ownedProperties.size();k++) {
+					for (int k = 0; k < cplayer.ownedProperties.size(); k++) {
 						System.out.println(cplayer.ownedProperties.get(k));
 					}
 				}
@@ -623,51 +622,51 @@ public class Board {
 	private boolean checkWin() {
 		boolean winner = false;
 		if ((p1.bal != 0 && p2.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0 && p7.bal == 0
-				&& p8.bal == 0) && !p1.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
-				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
-				&&p8.ownedProperties.isEmpty()) {
+				&& p8.bal == 0) && !p1.ownedProperties.isEmpty() && p2.ownedProperties.isEmpty()
+				&& p3.ownedProperties.isEmpty() && p4.ownedProperties.isEmpty() && p5.ownedProperties.isEmpty()
+				&& p6.ownedProperties.isEmpty() && p7.ownedProperties.isEmpty() && p8.ownedProperties.isEmpty()) {
 			p1.win = true;
 			winner = p1.win;
 		} else if ((p2.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) &&!p2.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
-				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
-				&&p8.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) && !p2.ownedProperties.isEmpty() && p1.ownedProperties.isEmpty()
+				&& p3.ownedProperties.isEmpty() && p4.ownedProperties.isEmpty() && p5.ownedProperties.isEmpty()
+				&& p6.ownedProperties.isEmpty() && p7.ownedProperties.isEmpty() && p8.ownedProperties.isEmpty()) {
 			p2.win = true;
 			winner = p2.win;
 		} else if ((p3.bal != 0 && p1.bal == 0 && p2.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) &&!p3.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()
-				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
-				&&p8.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) && !p3.ownedProperties.isEmpty() && p2.ownedProperties.isEmpty()
+				&& p1.ownedProperties.isEmpty() && p4.ownedProperties.isEmpty() && p5.ownedProperties.isEmpty()
+				&& p6.ownedProperties.isEmpty() && p7.ownedProperties.isEmpty() && p8.ownedProperties.isEmpty()) {
 			p3.win = true;
 			winner = p3.win;
 		} else if ((p4.bal != 0 && p1.bal == 0 && p3.bal == 0 && p2.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) &&!p4.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
-				&&p1.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
-				&&p8.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) && !p4.ownedProperties.isEmpty() && p2.ownedProperties.isEmpty()
+				&& p3.ownedProperties.isEmpty() && p1.ownedProperties.isEmpty() && p5.ownedProperties.isEmpty()
+				&& p6.ownedProperties.isEmpty() && p7.ownedProperties.isEmpty() && p8.ownedProperties.isEmpty()) {
 			p4.win = true;
 			winner = p4.win;
 		} else if ((p5.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p2.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) &&!p5.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
-				&&p4.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
-				&&p8.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) && !p5.ownedProperties.isEmpty() && p2.ownedProperties.isEmpty()
+				&& p3.ownedProperties.isEmpty() && p4.ownedProperties.isEmpty() && p1.ownedProperties.isEmpty()
+				&& p6.ownedProperties.isEmpty() && p7.ownedProperties.isEmpty() && p8.ownedProperties.isEmpty()) {
 			p5.win = true;
 			winner = p5.win;
 		} else if ((p6.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p2.bal == 0
-				&& p7.bal == 0 && p8.bal == 0) &&!p6.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
-				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
-				&&p8.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p8.bal == 0) && !p6.ownedProperties.isEmpty() && p2.ownedProperties.isEmpty()
+				&& p3.ownedProperties.isEmpty() && p4.ownedProperties.isEmpty() && p5.ownedProperties.isEmpty()
+				&& p1.ownedProperties.isEmpty() && p7.ownedProperties.isEmpty() && p8.ownedProperties.isEmpty()) {
 			p6.win = true;
 			winner = p6.win;
 		} else if ((p7.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p2.bal == 0 && p8.bal == 0) && !p7.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
-				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p1.ownedProperties.isEmpty()
-				&&p8.ownedProperties.isEmpty()) {
+				&& p2.bal == 0 && p8.bal == 0) && !p7.ownedProperties.isEmpty() && p2.ownedProperties.isEmpty()
+				&& p3.ownedProperties.isEmpty() && p4.ownedProperties.isEmpty() && p5.ownedProperties.isEmpty()
+				&& p6.ownedProperties.isEmpty() && p1.ownedProperties.isEmpty() && p8.ownedProperties.isEmpty()) {
 			p7.win = true;
 			winner = p7.win;
 		} else if ((p8.bal != 0 && p1.bal == 0 && p3.bal == 0 && p4.bal == 0 && p5.bal == 0 && p6.bal == 0
-				&& p7.bal == 0 && p2.bal == 0) && !p8.ownedProperties.isEmpty()&&p2.ownedProperties.isEmpty()&&p3.ownedProperties.isEmpty()
-				&&p4.ownedProperties.isEmpty()&&p5.ownedProperties.isEmpty()&&p6.ownedProperties.isEmpty()&&p7.ownedProperties.isEmpty()
-				&&p8.ownedProperties.isEmpty()) {
+				&& p7.bal == 0 && p2.bal == 0) && !p8.ownedProperties.isEmpty() && p2.ownedProperties.isEmpty()
+				&& p3.ownedProperties.isEmpty() && p4.ownedProperties.isEmpty() && p5.ownedProperties.isEmpty()
+				&& p6.ownedProperties.isEmpty() && p7.ownedProperties.isEmpty() && p8.ownedProperties.isEmpty()) {
 			p8.win = true;
 			winner = p8.win;
 		}
@@ -692,113 +691,170 @@ public class Board {
 		}
 		return returnValue;
 	}
+
 	public void trade(Player currentPlayer) throws IOException {
-		String whom="";
-		String yN="";
-		Player toTrade=null;
-		ArrayList<String> tempProperties=new ArrayList<>();
-		ArrayList<String> tempProperties2=new ArrayList<>();
-		boolean wantToTrade=false;
+		String whom = "";
+		String yN = "";
+		Player toTrade = null;
+		ArrayList<String> tempProperties = new ArrayList<>();
+		ArrayList<String> tempProperties2 = new ArrayList<>();
+		boolean wantToTrade = false;
 		do {
-		System.out.println(currentPlayer.getName()+" who do you want to trade with?");
-		whom=in.readLine();
-		}while(!(whom.equalsIgnoreCase(p1.getName())||whom.equalsIgnoreCase(p2.getName())||whom.equalsIgnoreCase(p3.getName())||whom.equalsIgnoreCase(p4.getName())
-				||whom.equalsIgnoreCase(p5.getName())||whom.equalsIgnoreCase(p6.getName())||whom.equalsIgnoreCase(p7.getName())||whom.equalsIgnoreCase(p8.getName()))
-				&&!whom.equalsIgnoreCase(currentPlayer.getName())&&!whom.isEmpty());
-		if(whom.equalsIgnoreCase(p1.getName())) {
+			System.out.println(currentPlayer.getName() + " who do you want to trade with?");
+			whom = in.readLine();
+		} while (!(whom.equalsIgnoreCase(p1.getName()) || whom.equalsIgnoreCase(p2.getName())
+				|| whom.equalsIgnoreCase(p3.getName()) || whom.equalsIgnoreCase(p4.getName())
+				|| whom.equalsIgnoreCase(p5.getName()) || whom.equalsIgnoreCase(p6.getName())
+				|| whom.equalsIgnoreCase(p7.getName()) || whom.equalsIgnoreCase(p8.getName()))
+				&& !whom.equalsIgnoreCase(currentPlayer.getName()) && !whom.isEmpty());
+		if (whom.equalsIgnoreCase(p1.getName())) {
 			do {
-			System.out.println(p1.getName()+" do you want to trade with "+currentPlayer.getName());
-			yN=in.readLine();
-			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
-			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
-				wantToTrade=true;
-				toTrade=p1;
+				System.out.println(p1.getName() + " do you want to trade with " + currentPlayer.getName());
+				yN = in.readLine();
+			} while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+					|| yN.equalsIgnoreCase("no")));
+			if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+				wantToTrade = true;
+				toTrade = p1;
 			}
-		}
-		else if(whom.equalsIgnoreCase(p2.getName())) {
+		} else if (whom.equalsIgnoreCase(p2.getName())) {
 			do {
-			System.out.println(p2.getName()+" do you want to trade with "+currentPlayer.getName());
-			yN=in.readLine();
-			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
-			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
-				wantToTrade=true;
-				toTrade=p2;
+				System.out.println(p2.getName() + " do you want to trade with " + currentPlayer.getName());
+				yN = in.readLine();
+			} while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+					|| yN.equalsIgnoreCase("no")));
+			if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+				wantToTrade = true;
+				toTrade = p2;
 			}
-		}
-		else if(whom.equalsIgnoreCase(p3.getName())) {
+		} else if (whom.equalsIgnoreCase(p3.getName())) {
 			do {
-			System.out.println(p3.getName()+" do you want to trade with "+currentPlayer.getName());
-			yN=in.readLine();
-			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
-			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
-				wantToTrade=true;
-				toTrade=p3;
+				System.out.println(p3.getName() + " do you want to trade with " + currentPlayer.getName());
+				yN = in.readLine();
+			} while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+					|| yN.equalsIgnoreCase("no")));
+			if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+				wantToTrade = true;
+				toTrade = p3;
 			}
-		}
-		else if(whom.equalsIgnoreCase(p4.getName())) {
+		} else if (whom.equalsIgnoreCase(p4.getName())) {
 			do {
-			System.out.println(p4.getName()+" do you want to trade with "+currentPlayer.getName());
-			yN=in.readLine();
-			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
-			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
-				wantToTrade=true;
-				toTrade=p4;
+				System.out.println(p4.getName() + " do you want to trade with " + currentPlayer.getName());
+				yN = in.readLine();
+			} while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+					|| yN.equalsIgnoreCase("no")));
+			if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+				wantToTrade = true;
+				toTrade = p4;
 			}
-		}
-		else if(whom.equalsIgnoreCase(p5.getName())) {
+		} else if (whom.equalsIgnoreCase(p5.getName())) {
 			do {
-			System.out.println(p5.getName()+" do you want to trade with "+currentPlayer.getName());
-			yN=in.readLine();
-			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
-			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
-				wantToTrade=true;
-				toTrade=p5;
+				System.out.println(p5.getName() + " do you want to trade with " + currentPlayer.getName());
+				yN = in.readLine();
+			} while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+					|| yN.equalsIgnoreCase("no")));
+			if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+				wantToTrade = true;
+				toTrade = p5;
 			}
-		}
-		else if(whom.equalsIgnoreCase(p6.getName())) {
+		} else if (whom.equalsIgnoreCase(p6.getName())) {
 			do {
-			System.out.println(p6.getName()+" do you want to trade with "+currentPlayer.getName());
-			yN=in.readLine();
-			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
-			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
-				wantToTrade=true;
-				toTrade=p6;
+				System.out.println(p6.getName() + " do you want to trade with " + currentPlayer.getName());
+				yN = in.readLine();
+			} while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+					|| yN.equalsIgnoreCase("no")));
+			if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+				wantToTrade = true;
+				toTrade = p6;
 			}
-		}
-		else if(whom.equalsIgnoreCase(p7.getName())) {
+		} else if (whom.equalsIgnoreCase(p7.getName())) {
 			do {
-			System.out.println(p7.getName()+" do you want to trade with "+currentPlayer.getName());
-			yN=in.readLine();
-			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
-			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
-				wantToTrade=true;
-				toTrade=p7;
+				System.out.println(p7.getName() + " do you want to trade with " + currentPlayer.getName());
+				yN = in.readLine();
+			} while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+					|| yN.equalsIgnoreCase("no")));
+			if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+				wantToTrade = true;
+				toTrade = p7;
 			}
-		}
-		else if(whom.equalsIgnoreCase(p8.getName())) {
+		} else if (whom.equalsIgnoreCase(p8.getName())) {
 			do {
-			System.out.println(p8.getName()+" do you want to trade with "+currentPlayer.getName());
-			yN=in.readLine();
-			}while(!(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")||yN.equalsIgnoreCase("n")||yN.equalsIgnoreCase("no")));
-			if(yN.equalsIgnoreCase("y")||yN.equalsIgnoreCase("yes")) {
-				wantToTrade=true;
-				toTrade=p8;
+				System.out.println(p8.getName() + " do you want to trade with " + currentPlayer.getName());
+				yN = in.readLine();
+			} while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+					|| yN.equalsIgnoreCase("no")));
+			if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+				wantToTrade = true;
+				toTrade = p8;
 			}
 		}
-		if(wantToTrade) {
-			for(int i=0;i<currentPlayer.ownedProperties.size();i++) {
-				System.out.println(currentPlayer.getName()+" you have "+currentPlayer.ownedProperties.get(i));
+		if (wantToTrade) {
+			for (int i = 0; i < currentPlayer.ownedProperties.size(); i++) {
+				System.out.println(currentPlayer.getName() + " you have " + currentPlayer.ownedProperties.get(i));
 			}
-			for(int i=0;i<toTrade.ownedProperties.size();i++) {
-				System.out.println(toTrade.getName()+" has "+currentPlayer.ownedProperties.get(i));
+			for (int i = 0; i < toTrade.ownedProperties.size(); i++) {
+				System.out.println(toTrade.getName() + " has " + toTrade.ownedProperties.get(i));
+			}
+			boolean isThatAll = false;
+			String input = "";
+			yN = "";
+			while (!isThatAll) {
+				for (int i = 0; i < toTrade.ownedProperties.size(); i++) {
+					System.out.println(toTrade.getName() + " has " + toTrade.ownedProperties.get(i));
+				}
+				while (!(toTrade.ownedProperties.contains(input)|| tempProperties.contains(input))) {
+					System.out.println(currentPlayer.getName() + " what do you want? (one at a time) ");
+					input = in.readLine();
+				}
+				tempProperties.add(input);
+				while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+						|| yN.equalsIgnoreCase("no"))) {
+					System.out.println("Is that all you want?");
+					yN = in.readLine();
+				}
+				if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+					isThatAll = true;
+				}
+			}
+			isThatAll=false;
+			yN="";
+			input="";
+			while (!isThatAll) {
+				for (int i = 0; i < currentPlayer.ownedProperties.size(); i++) {
+					System.out.println(currentPlayer.getName() + " you have " + currentPlayer.ownedProperties.get(i));
+				}
+				while (!(currentPlayer.ownedProperties.contains(input)|| tempProperties2.contains(input))) {
+					System.out.println(currentPlayer.getName() + " what do you want to give? (one at a time) ");
+					input = in.readLine();
+				}
+				tempProperties2.add(input);
+				while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+						|| yN.equalsIgnoreCase("no"))) {
+					System.out.println("Is that all your offering?");
+					yN = in.readLine();
+				}
+				if (yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")) {
+					isThatAll = true;
+				} 
+			}
+			yN="";
+			while (!(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes") || yN.equalsIgnoreCase("n")
+					|| yN.equalsIgnoreCase("no"))) {
+				System.out.println("is this trade acceptable?");
+				yN = in.readLine();
+			}
+			if(yN.equalsIgnoreCase("y") || yN.equalsIgnoreCase("yes")){
+				
+					currentPlayer.ownedProperties.removeAll(tempProperties2);
+					toTrade.ownedProperties.removeAll(tempProperties);
+					currentPlayer.ownedProperties.addAll(tempProperties);
+					toTrade.ownedProperties.addAll(tempProperties2);
+				
 			}
 		}
-		boolean isThatAll=false;
-		while(!isThatAll) {
-		System.out.println(currentPlayer.getName()+" what do you want? (one at a time) ");
-		}
+		
 	}
-	
+
 	private boolean isBankrupt(Player cplayer) {
 		if (cplayer.bal == 0 && cplayer.ownedProperties.isEmpty()) {
 			cplayer.bankrupt = true;

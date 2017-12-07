@@ -10,7 +10,6 @@ import java.util.Random;
 public class BoardSpace {
 	ChanceCard chance = new ChanceCard();
 	CommunityChest chest = new CommunityChest();
-	private boolean taxation = true;
 	private String jailMenu = "You are in Jail! These are your options:\n1:Try to Roll For Doubles 2.Trade with Others Free Card 3: Build on Propeties\n4: Morgage Property 5:Pay $50 Fine";
 	public BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
@@ -50,12 +49,12 @@ public class BoardSpace {
 
 	public void spaceName(Player player, int space, Banker banker, Player p1, Player p2, Player p3, Player p4,
 			Player p5, Player p6, Player p7, Player p8, ArrayList<String> turnOrder) throws IOException {
-		boolean test;
 		if (space == 0) {
 			if (player.startedOn == false) {
 				player.startedOn = true;
 				System.out.println(player.getName() + "'s current space is the Go Square");
-				if (player.firstGo == false) {
+				if (player.firstGo == false && space == 0) {
+					
 					passGo(player);
 				}
 			} else {
@@ -79,13 +78,13 @@ public class BoardSpace {
 				} else {
 					if (space == 2) {
 						System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
-					}
-					else {
-					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					} else {
+						spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+						player.startedOn = false;
 					}
 				}
 			} else {
-				System.out.println(player.getName() + "'s current space is the CHANCE!");
+				System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
 				player.startedOn = false;
 			}
 		} else if (space == 3) {
@@ -94,7 +93,8 @@ public class BoardSpace {
 				buyit("Baltic Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 4) {
-			if (player.startedOn = false) {
+			if (player.startedOn = false || player.taxed == false) {
+				player.taxed = true;
 				player.startedOn = true;
 				System.out.println(player.getName() + "'s current space is the INCOME TAX!");
 				int tax = promptForInt("Do you wish to pay 1: $200 or 2: 10% of Your Total Worth", 1, 2);
@@ -102,13 +102,33 @@ public class BoardSpace {
 					player.bal -= 200;
 					System.out.println(player.getName() + ":" + player.getToken() + "'s new balance is: " + player.bal);
 				} else {
-					
-					int taxation = player.bal ;
+					int unmoraged = 0;
+					int moraged = 0;
+					try {
+						for (int i = 0; i < player.ownedProperties.size(); i++) {
+							unmoraged = price(player.ownedProperties.get(i)) + unmoraged;
+						}
+					} catch (IndexOutOfBoundsException ex) {
+						unmoraged = 0;
+					}
+					try {
+						for (int i = 0; i < player.MorgegedPrpoerties.size(); i++) {
+							moraged = (price(player.MorgegedPrpoerties.get(i)) + moraged) / 2;
+						}
+					} catch (IndexOutOfBoundsException ex) {
+						moraged = 0;
+					}
+					double taxation = (player.bal + unmoraged + moraged) * .1 ;
+					taxation = Math.round(taxation);
+					int taxed = (int) taxation;
+					player.bal = player.bal - taxed;
+					System.out.println(player.getName() + ":" + player.getToken() + "'s new balance is: " + player.bal);
 					// add bal + morages worth all times .10
 				}
 			} else {
 				System.out.println(player.getName() + "'s current space is the INCOME TAX!");
 				player.startedOn = false;
+				player.taxed = false;
 			}
 		} else if (space == 5) {
 			System.out.println(player.getName() + "'s current space is the READING RAILROAD!");
@@ -131,9 +151,9 @@ public class BoardSpace {
 				} else {
 					if (space == 7) {
 						System.out.println(player.getName() + "'s current space is the CHANCE!");
-					}
-					else {
-					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					} else {
+						spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+						player.startedOn = false;
 					}
 				}
 			} else {
@@ -146,11 +166,12 @@ public class BoardSpace {
 				buyit("Vermont Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 9) {
-			System.out.println(player.getName() + "'s current space is the CONNETICUT AVENUE!");
-			if (banker.properties.contains("Conneticut Avenue")) {
-				buyit("Conneticut Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			System.out.println(player.getName() + "'s current space is the CONNECTICUT AVENUE!");
+			if (banker.properties.contains("Connecticut Avenue")) {
+				buyit("Connecticut Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		} else if (space == 10) {
+			player.startedOn = false;
 			System.out.print(player.getName() + "'s current space is the JAIL:");
 			if (player.inJail == true) {
 				System.out.print(" IN JAIL!");
@@ -217,13 +238,13 @@ public class BoardSpace {
 				} else {
 					if (space == 17) {
 						System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
-					}
-					else {
-					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					} else {
+						spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+						player.startedOn = false;
 					}
 				}
 			} else {
-				System.out.println(player.getName() + "'s current space is the CHANCE!");
+				System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
 				player.startedOn = false;
 			}
 		} else if (space == 18) {
@@ -254,9 +275,9 @@ public class BoardSpace {
 				} else {
 					if (space == 22) {
 						System.out.println(player.getName() + "'s current space is the CHANCE!");
-					}
-					else {
-					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					} else {
+						spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+						player.startedOn = false;
 					}
 				}
 			} else {
@@ -302,6 +323,7 @@ public class BoardSpace {
 			System.out.println(player.getName() + "'s current space is the GO TO JAIL!");
 			System.out.println(player.getName() + "is Sent to Jail");
 			player.inJail = true;
+			player.startedOn = false;
 			spaceChange(player, 10);
 
 		} else if (space == 31) {
@@ -325,13 +347,13 @@ public class BoardSpace {
 				} else {
 					if (space == 33) {
 						System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
-					}
-					else {
-					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					} else {
+						spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+						player.startedOn = false;
 					}
 				}
 			} else {
-				System.out.println(player.getName() + "'s current space is the CHANCE!");
+				System.out.println(player.getName() + "'s current space is the COMMUNITY CHEST!");
 				player.startedOn = false;
 			}
 		} else if (space == 34) {
@@ -355,9 +377,9 @@ public class BoardSpace {
 				} else {
 					if (space == 36) {
 						System.out.println(player.getName() + "'s current space is the CHANCE!");
-					}
-					else {
-					spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+					} else {
+						spaceName(player, space, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder);
+						player.startedOn = false;
 					}
 				}
 			} else {
@@ -379,8 +401,8 @@ public class BoardSpace {
 			}
 		} else if (space == 39) {
 			System.out.println(player.getName() + "'s current space is the BOARDWALK!");
-			if (banker.properties.contains("Board Walk")) {
-				buyit("Board Walk", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			if (banker.properties.contains("Boardwalk")) {
+				buyit("Boardwalk", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
 		}
 	}
@@ -427,7 +449,7 @@ public class BoardSpace {
 		case ("Atlantic Avenue"):
 			cost = 260;
 			break;
-		case ("B & O Railroad"):
+		case ("B&O Railroad"):
 			cost = 200;
 			break;
 		case ("Baltic Avenue"):
@@ -519,6 +541,9 @@ public class BoardSpace {
 				space -= 40;
 				if (space != 0) {
 					passGo(player);
+				}
+				if (space == 0) {
+					player.startedOn = true;
 				}
 			}
 			for (int i = 0; i < player.space.length; i++) {

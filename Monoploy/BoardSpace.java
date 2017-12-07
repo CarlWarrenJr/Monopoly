@@ -579,6 +579,31 @@ public class BoardSpace {
 			Player p5, Player p6, Player p7, Player p8, int size) {
 		int houses=0;
 		int rentAmount = 0;
+		Player temp=null;
+		if(p1.ownedProperties.contains(proprty)) {
+			temp=p1;
+		}
+		else if(p2.ownedProperties.contains(proprty)) {
+			temp=p2;
+		}
+		else if(p3.ownedProperties.contains(proprty)) {
+			temp=p3;
+		}
+		else if(p4.ownedProperties.contains(proprty)) {
+			temp=p4;
+		}
+		else if(p5.ownedProperties.contains(proprty)) {
+			temp=p5;
+		}
+		else if(p6.ownedProperties.contains(proprty)) {
+			temp=p6;
+		}
+		else if(p7.ownedProperties.contains(proprty)) {
+			temp=p7;
+		}
+		else if(p8.ownedProperties.contains(proprty)) {
+			temp=p8;
+		}
 		if(houses==0) {			
 			switch (proprty) {
 			case ("Atlantic Avenue"):
@@ -670,7 +695,7 @@ public class BoardSpace {
 		
 		}
 		player.bal-=rentAmount;
-		
+		temp.bal+=rentAmount;
 	}
 
 	private void buyit(String proprty, Player player, Banker banker, Player p1, Player p2, Player p3, Player p4,

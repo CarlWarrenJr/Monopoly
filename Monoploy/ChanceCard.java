@@ -32,7 +32,7 @@ public class ChanceCard {
 		createDeck();
 	}
 
-	public void createDeck() {
+	private void createDeck() {
 		int temp;
 		int size = cards.size();
 		while (deck.size() != size) {
@@ -44,8 +44,16 @@ public class ChanceCard {
 	}
 
 	public void draw(Player current,int space,Player p1,Player p2,Player p3,Player p4, Player p5,Player p6,Player p7, Player p8, ArrayList<String> turnOrder) {
-		String drawnCard = deck.get(0);
+		String drawnCard = "";
+		try {
+			drawnCard = deck.get(0);
 		deck.remove(0);
+		}
+		catch (IndexOutOfBoundsException ex){
+			setCards();
+			drawnCard = deck.get(0);
+			deck.remove(0);
+		}
 		System.out.println(drawnCard);
 		System.out.println();
 		switch (drawnCard) {

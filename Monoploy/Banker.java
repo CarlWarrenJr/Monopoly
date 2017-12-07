@@ -174,5 +174,17 @@ public class Banker {
 		playr.MorgegedPrpoerties.add(property);
 		playr.ownedProperties.remove(property);
 		playr.bal+=(price/2);
+		System.out.println("New balance is: " + playr.bal);
+	}
+	public void unMorgage(Player player, String property, int price) {
+		if (player.bal >= price + price*.1) {
+		player.ownedProperties.add(property);
+		player.MorgegedPrpoerties.remove(property);
+		player.bal -= price + price*.1;
+		System.out.println("New balance is: " + player.bal);
+		}
+		else {
+			System.out.println("You Have insofficent funds to Unmorgage this property");
+		}
 	}
 }

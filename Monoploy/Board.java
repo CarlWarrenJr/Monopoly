@@ -548,7 +548,7 @@ public class Board {
 		boolean winner = checkWin();
 		Player cplayer = p1;
 		cplayer.bankrupt = isBankrupt(cplayer);
-		if (cplayer.bankrupt) {
+		if (cplayer.bankrupt == true) {
 			tunOder.remove(cplayer.getName() + ":" + cplayer.getToken());
 		}
 		for (int i = 0; i < numberPlayers; i++) {
@@ -584,17 +584,18 @@ public class Board {
 						diceRolled = true;
 					}
 					currentSpace = space.spaceFind(cplayer);
-					space.spaceName(cplayer, currentSpace, banker, p1, p2, p3, p4, p5, p6, p7, p8, tunOder);
+					space.spaceName(cplayer, currentSpace, banker, p1, p2, p3, p4, p5, p6, p7, p8, tunOder, Board.this);
 					System.out.println(
 							cplayer.getName() + " Rolled a: " + cplayer.diceRoll + " and a " + cplayer.diceRoll2);
-					if (cplayer.diceRoll == cplayer.diceRoll2) {
+					if (cplayer.diceRoll == cplayer.diceRoll2 && cplayer.inJail == false) {
 						cplayer.numberOfDoubles++;
 					}
 					if (cplayer.numberOfDoubles < 3) {
 						space.spaceChange(cplayer, currentSpace);
 						currentSpace = space.spaceFind(cplayer);
-						space.spaceName(cplayer, currentSpace, banker, p1, p2, p3, p4, p5, p6, p7, p8, tunOder);
+						space.spaceName(cplayer, currentSpace, banker, p1, p2, p3, p4, p5, p6, p7, p8, tunOder,Board.this);
 					} else {
+						System.out.println("Sent to Jail!");
 						diceRolled = true;
 						cplayer.inJail = true;
 						space.spaceChange(cplayer, 0);
@@ -605,16 +606,37 @@ public class Board {
 				} else if (menuSelect == 3) {
 
 				} else if (menuSelect == 4) {
-
+					int morgRepo = space.promptForInt("Do you wish to 1: Morgage a Property 2: Buy Back a Morgage Property?", 1, 2);
+						String toMorg = "";
+						boolean properMorg = false;
+						while (properMorg == false) {
+							toMorg = space.promptForInput("Enter the propery you wish to Morgage/Unmorgage.", false);
+							if (cplayer.ownedProperties.contains(toMorg) || cplayer.MorgegedPrpoerties.contains(toMorg)) {
+								properMorg = true;
+							}
+							else if (cplayer.ownedProperties.isEmpty() && cplayer.MorgegedPrpoerties.isEmpty()) {
+								System.out.println("You have no Propotiesto Morgage/Unmorgage");
+								morgRepo = 3;
+								properMorg = true;
+							}
+						}
+						if (morgRepo == 1) {
+							banker.mortgage(cplayer, toMorg, space.price(toMorg));
+						} else if (morgRepo == 2) {
+							banker.unMorgage(cplayer, toMorg, space.price(toMorg));
+						}
 				} else if (menuSelect == 5) {
 					System.out.print("Owned Properties: ");
 					for (int k = 0; k < cplayer.ownedProperties.size(); k++) {
 						System.out.println(cplayer.ownedProperties.get(k));
 					}
+					System.out.print("Morgaged Properties: ");
+					for (int k = 0; k < cplayer.MorgegedPrpoerties.size(); k++) {
+						System.out.println(cplayer.MorgegedPrpoerties.get(k));
+					}
 				}
 			}
 		}
-
 		return winner;
 
 	}
@@ -852,7 +874,6 @@ public class Board {
 				
 			}
 		}
-		
 	}
 
 	private boolean isBankrupt(Player cplayer) {

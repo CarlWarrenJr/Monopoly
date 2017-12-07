@@ -10,6 +10,7 @@ public class Player {
 	public boolean chestDraw = true;
 	public boolean firstGo = true;
 	public boolean bankrupt = false;
+	public boolean taxed = false;
 	private String token;
 	private String name;
 	public String[] space = new String[40];

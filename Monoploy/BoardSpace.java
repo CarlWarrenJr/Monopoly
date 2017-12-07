@@ -67,6 +67,13 @@ public class BoardSpace {
 			if (banker.properties.contains("Mediterranean Avenue")) {
 				buyit("Mediterranean Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Mediterranean Avenue")) {
+				rent("Mediterranean Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+				
+			}
 		} else if (space == 2) {
 			if (player.startedOn == false) {
 				player.startedOn = true;
@@ -91,6 +98,12 @@ public class BoardSpace {
 			System.out.println(player.getName() + "'s current space is the BALTIC AVENUE!");
 			if (banker.properties.contains("Baltic Avenue")) {
 				buyit("Baltic Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Baltic Avenue")) {
+				rent("Baltic Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 4) {
 			if (player.startedOn = false || player.taxed == false) {
@@ -135,10 +148,22 @@ public class BoardSpace {
 			if (banker.properties.contains("Reading Railroad")) {
 				buyit("Reading Railroad", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Reading Railroad")) {
+				rent("Reading Railroad", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 6) {
 			System.out.println(player.getName() + "'s current space is the ORIENTAL AVENUE!");
 			if (banker.properties.contains("Oriental Avenue")) {
 				buyit("Oriental Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Oriental Avenue")) {
+				rent("Oriental Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 7) {
 			if (player.startedOn == false) {
@@ -165,10 +190,22 @@ public class BoardSpace {
 			if (banker.properties.contains("Vermont Avenue")) {
 				buyit("Vermont Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Vermont Avenue")) {
+				rent("Vermont Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 9) {
 			System.out.println(player.getName() + "'s current space is the CONNECTICUT AVENUE!");
 			if (banker.properties.contains("Connecticut Avenue")) {
 				buyit("Connecticut Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Connecticut Avenue")) {
+				rent("Connecticut Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 10) {
 			player.startedOn = false;
@@ -202,30 +239,65 @@ public class BoardSpace {
 			if (banker.properties.contains("St. Charles Place")) {
 				buyit("St. Charles Place", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("St. Charles Place")) {
+				rent("St. Charles Place", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 12) {
 			System.out.println(player.getName() + "'s current space is the ELECTRIC COMPANY!");
 			if (banker.properties.contains("Electric Company")) {
 				buyit("Electric Company", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Electric Company")) {
+				rent("Electric Company", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 13) {
 			System.out.println(player.getName() + "'s current space is the STATES AVENUE!");
 			if (banker.properties.contains("States Avenue")) {
 				buyit("States Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("States Avenue")) {
+				rent("States Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 14) {
 			System.out.println(player.getName() + "'s current space is the VIRGINIA AVENUE!");
 			if (banker.properties.contains("Virginia Avenue")) {
 				buyit("Virginia Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Virginia Avenue")) {
+				rent("Virginia Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 15) {
 			System.out.println(player.getName() + "'s current space is the PENNSYLVANIA RAILROAD!");
 			if (banker.properties.contains("Pennsylvania Railroad")) {
 				buyit("Pennsylvania Railroad", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Pennsylvania Railroad")) {
+				rent("Pennsylvania Railroad", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 16) {
 			System.out.println(player.getName() + "'s current space is the ST. JAMES PLACE!");
 			if (banker.properties.contains("St. James Place")) {
 				buyit("St. James Place", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}else {
+				if(!player.ownedProperties.contains("St. James Place")) {
+				rent("St. James Place", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 17) {
 			if (player.startedOn == false) {
@@ -252,10 +324,22 @@ public class BoardSpace {
 			if (banker.properties.contains("Tennessee Avenue")) {
 				buyit("Tennessee Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Tennessee Avenue")) {
+				rent("Tennessee Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 19) {
 			System.out.println(player.getName() + "'s current space is the NEW YORK AVENUE!");
 			if (banker.properties.contains("New York Avenue")) {
 				buyit("New York Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Electric Company")) {
+				rent("Electric Company", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 20) {
 			System.out.println(player.getName() + "'s current space is the FREE PARKING!");
@@ -263,6 +347,12 @@ public class BoardSpace {
 			System.out.println(player.getName() + "'s current space is the KENTUKY AVENUE!");
 			if (banker.properties.contains("Kentucky Avenue")) {
 				buyit("Kentucky Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Kentucky Avenue")) {
+				rent("Kentucky Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 22) {
 			if (player.startedOn == false) {
@@ -289,35 +379,77 @@ public class BoardSpace {
 			if (banker.properties.contains("Indiana Avenue")) {
 				buyit("Indiana Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Indiana Avenue")) {
+				rent("Indiana Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 24) {
 			System.out.println(player.getName() + "'s current space is the ILLINOIS Avenue!");
 			if (banker.properties.contains("Illinois Avenue")) {
 				buyit("Illinois Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Illinois Avenue")) {
+				rent("Illinois Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 25) {
 			System.out.println(player.getName() + "'s current space is the B&O RAILROAD!");
 			if (banker.properties.contains("B&O Railroad")) {
 				buyit("B&O Railroad", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("B&O Railroad")) {
+				rent("B&O Railroad", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 26) {
 			System.out.println(player.getName() + "'s current space is the ATLANTIC AVENUE!");
 			if (banker.properties.contains("Atlantic Avenue")) {
 				buyit("Atlantic Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Atlantic Avenue")) {
+				rent("Atlantic Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 27) {
 			System.out.println(player.getName() + "'s current space is the VENTNOR AVENUE!");
 			if (banker.properties.contains("Ventnor Avenue")) {
 				buyit("Ventnor Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Ventnor Avenue")) {
+				rent("Ventnor Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 28) {
 			System.out.println(player.getName() + "'s current space is the WATER WORKS!");
 			if (banker.properties.contains("Water Works")) {
 				buyit("Water Works", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Water Works")) {
+				rent("Water Works", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 29) {
 			System.out.println(player.getName() + "'s current space is the MARVIN GARDENS!");
 			if (banker.properties.contains("Marvin Gardens")) {
 				buyit("Marvin Gardens", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Marvin Gardens")) {
+				rent("Marvin Gardens", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 30) {
 			System.out.println(player.getName() + "'s current space is the GO TO JAIL!");
@@ -331,10 +463,22 @@ public class BoardSpace {
 			if (banker.properties.contains("Pacific Avenue")) {
 				buyit("Pacific Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Pacific Avenue")) {
+				rent("Pacific Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 32) {
 			System.out.println(player.getName() + "'s current space is the NORTH CAROLINA AVENUE!");
 			if (banker.properties.contains("North Carolina Avenue")) {
 				buyit("North Carolina Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("North Carolina Avenue")) {
+				rent("North Carolina Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 33) {
 			if (player.startedOn == false) {
@@ -361,10 +505,22 @@ public class BoardSpace {
 			if (banker.properties.contains("Pennsylvania Avenue")) {
 				buyit("Pennsylvania Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Pennsylvania Avenue")) {
+				rent("Pennsylvania Avenue", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 35) {
 			System.out.println(player.getName() + "'s current space is the SHORT LINE!");
 			if (banker.properties.contains("Short Line")) {
 				buyit("Short Line", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+			}
+			else {
+				if(!player.ownedProperties.contains("Short Line")) {
+				rent("Short Line", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
 			}
 		} else if (space == 36) {
 			if (player.startedOn == false) {
@@ -391,6 +547,12 @@ public class BoardSpace {
 			if (banker.properties.contains("Park Place")) {
 				buyit("Park Place", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Park Place")) {
+				rent("Park Place", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		} else if (space == 38) {
 			if (player.startedOn = false) {
 				player.startedOn = true;
@@ -404,7 +566,111 @@ public class BoardSpace {
 			if (banker.properties.contains("Boardwalk")) {
 				buyit("Boardwalk", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
 			}
+			else {
+				if(!player.ownedProperties.contains("Boardwalk")) {
+				rent("Boardwalk", player, banker, p1, p2, p3, p4, p5, p6, p7, p8, turnOrder.size());
+				System.out.println(player.bal);
+				}
+			}
 		}
+	}
+
+	private void rent(String proprty, Player player, Banker banker, Player p1, Player p2, Player p3, Player p4,
+			Player p5, Player p6, Player p7, Player p8, int size) {
+		int houses=0;
+		int rentAmount = 0;
+		if(houses==0) {			
+			switch (proprty) {
+			case ("Atlantic Avenue"):
+				rentAmount = 22;
+				break;
+			case ("B&O Railroad"):
+				rentAmount = 25;
+				break;
+			case ("Baltic Avenue"):
+				rentAmount = 4;
+				break;
+			case ("Boardwalk"):
+				rentAmount = 50;
+				break;
+			case ("Connecticut Avenue"):
+				rentAmount = 8;
+				break;
+			case ("Electric Company"):
+				rentAmount = (promptForRandom(12, 2)*4);
+				break;
+			case ("Illinois Avenue"):
+				rentAmount = 20;
+				break;
+			case ("Indiana Avenue"):
+				rentAmount = 18;
+				break;
+			case ("Kentucky Avenue"):
+				rentAmount = 18;
+				break;
+			case ("Marvin Gardens"):
+				rentAmount = 24;
+				break;
+			case ("Mediterranean Avenue"):
+				rentAmount = 2;
+				break;
+			case ("New York Avenue"):
+				rentAmount = 16;
+				break;
+			case ("North Carolina Avenue"):
+				rentAmount = 26;
+				break;
+			case ("Oriental Avenue"):
+				rentAmount = 6;
+				break;
+			case ("Pacific Avenue"):
+				rentAmount = 26;
+				break;
+			case ("Park Place"):
+				rentAmount = 35;
+				break;
+			case ("Pennsylvania Avenue"):
+				rentAmount = 28;
+				break;
+			case ("Pennsylvania Railroad"):
+				rentAmount = 25;
+				break;
+			case ("Reading Railroad"):
+				rentAmount = 25;
+				break;
+			case ("Short Line"):
+				rentAmount = 25;
+				break;
+			case ("St. Charles Place"):
+				rentAmount = 10;
+				break;
+			case ("St. James Place"):
+				rentAmount = 14;
+				break;
+			case ("States Avenue"):
+				rentAmount = 10;
+				break;
+			case ("Tennessee Avenue"):
+				rentAmount = 14;
+				break;
+			case ("Ventnor Avenue"):
+				rentAmount = 22;
+				break;
+			case ("Vermont Avenue"):
+				rentAmount = 6;
+				break;
+			case ("Virginia Avenue"):
+				rentAmount = 12;
+				break;
+			case ("Water Works"):
+				rentAmount = (promptForRandom(12, 2)*4);
+				break;
+			}
+			
+		
+		}
+		player.bal-=rentAmount;
+		
 	}
 
 	private void buyit(String proprty, Player player, Banker banker, Player p1, Player p2, Player p3, Player p4,

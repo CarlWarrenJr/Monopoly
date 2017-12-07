@@ -13,7 +13,7 @@ public class Banker {
 
 	public void propertiesToBanker() {
 		properties.add("Atlantic Avenue");
-		properties.add("B & O Railroad");
+		properties.add("B&O Railroad");
 		properties.add("Baltic Avenue");
 		properties.add("Boardwalk");
 		properties.add("Connecticut Avenue");
@@ -46,48 +46,43 @@ public class Banker {
 		properties.remove(bought);
 	}
 
-	public Player auctionHouse(Player player,Player p1, Player p2, Player p3, Player p4, Player p5, Player p6, Player p7, Player p8,
-			int numberPlayers) throws IOException {
-		p1.bid=0;
-		p2.bid=0;
-		p3.bid=0;
-		p4.bid=0;
-		p5.bid=0;
-		p6.bid=0;
-		p7.bid=0;
-		p8.bid=0;
+	public Player auctionHouse(Player player, Player p1, Player p2, Player p3, Player p4, Player p5, Player p6,
+			Player p7, Player p8, int numberPlayers) throws IOException {
+		p1.bid = 0;
+		p2.bid = 0;
+		p3.bid = 0;
+		p4.bid = 0;
+		p5.bid = 0;
+		p6.bid = 0;
+		p7.bid = 0;
+		p8.bid = 0;
 
 		if (numberPlayers == 2) {
 			askBid(p1);
 			askBid(p2);
-		}
-		else if (numberPlayers == 3) {
+		} else if (numberPlayers == 3) {
 			askBid(p1);
 			askBid(p2);
 			askBid(p3);
-		}
-		else if (numberPlayers == 4) {
+		} else if (numberPlayers == 4) {
 			askBid(p1);
 			askBid(p2);
 			askBid(p3);
 			askBid(p4);
-		}
-		else if (numberPlayers == 5) {
+		} else if (numberPlayers == 5) {
 			askBid(p1);
 			askBid(p2);
 			askBid(p3);
 			askBid(p4);
 			askBid(p5);
-		}
-		else if (numberPlayers == 6) {
+		} else if (numberPlayers == 6) {
 			askBid(p1);
 			askBid(p2);
 			askBid(p3);
 			askBid(p4);
 			askBid(p5);
 			askBid(p6);
-		}
-		else if (numberPlayers == 7) {
+		} else if (numberPlayers == 7) {
 			askBid(p1);
 			askBid(p2);
 			askBid(p3);
@@ -95,8 +90,7 @@ public class Banker {
 			askBid(p5);
 			askBid(p6);
 			askBid(p7);
-		}
-		else{
+		} else {
 			askBid(p1);
 			askBid(p2);
 			askBid(p3);
@@ -106,7 +100,7 @@ public class Banker {
 			askBid(p7);
 			askBid(p8);
 		}
-		ArrayList<Integer> bids=new ArrayList<>(); 
+		ArrayList<Integer> bids = new ArrayList<>();
 		bids.add(p1.bid);
 		bids.add(p2.bid);
 		bids.add(p3.bid);
@@ -115,48 +109,46 @@ public class Banker {
 		bids.add(p6.bid);
 		bids.add(p7.bid);
 		bids.add(p8.bid);
-		compare(bids,numberPlayers);
-		if(p8.bid!=0||p7.bid!=0||p6.bid!=0||p5.bid!=0||p4.bid!=0||p3.bid!=0||p2.bid!=0||p1.bid!=0) {
-		if(bids.get(7)==p1.bid) {
-			return p1;
-		}
-		else if(bids.get(7)==p2.bid) {
-			return p2;
-		}
-		else if(bids.get(7)==p3.bid) {
-			return p3;
-		}
-		else if(bids.get(7)==p4.bid) {
-			return p4;
-		}
-		else if(bids.get(7)==p5.bid) {
-			return p5;
-		}
-		else if(bids.get(7)==p6.bid) {
-			return p6;
-		}
-		else if(bids.get(7)==p7.bid) {
-			return p7;
-		}
-		else {
-			return p8;
-		}
-		}
-		else {
+		compare(bids, numberPlayers);
+		if (p8.bid != 0 || p7.bid != 0 || p6.bid != 0 || p5.bid != 0 || p4.bid != 0 || p3.bid != 0 || p2.bid != 0
+				|| p1.bid != 0) {
+			if (bids.get(7) == p1.bid) {
+				p1.bal -= player.bid;
+				return p1;
+			} else if (bids.get(7) == p2.bid) {
+				p2.bal -= player.bid;
+				return p2;
+			} else if (bids.get(7) == p3.bid) {
+				p3.bal -= player.bid;
+				return p3;
+			} else if (bids.get(7) == p4.bid) {
+				p4.bal -= player.bid;
+				return p4;
+			} else if (bids.get(7) == p5.bid) {
+				p5.bal -= player.bid;
+				return p5;
+			} else if (bids.get(7) == p6.bid) {
+				p6.bal -= player.bid;
+				return p6;
+			} else if (bids.get(7) == p7.bid) {
+				p7.bal -= player.bid;
+				return p7;
+			} else {
+				p8.bal -= player.bid;
+				return p8;
+			}
+		} else {
+			player.bal -= player.bid;
 			return player;
 		}
-		
+
 	}
-	
 
-	
-	private void compare(ArrayList<Integer> bids,int numberPlayers) {
-		for(int i=0;i<numberPlayers;i++) {
-		bids.sort(null);
+	private void compare(ArrayList<Integer> bids, int numberPlayers) {
+		for (int i = 0; i < numberPlayers; i++) {
+			bids.sort(null);
 		}
-		}
-	
-
+	}
 
 	private void askBid(Player player) throws IOException {
 		String temp = "";
@@ -166,10 +158,9 @@ public class Banker {
 			try {
 				temp = in.readLine();
 				player.bid = Integer.parseInt(temp);
-				if(player.bal>=player.bid) {
-				valid=true;
-				}
-				else {
+				if (player.bal >= player.bid) {
+					valid = true;
+				} else {
 					System.out.println("You don't have that much");
 				}
 			} catch (NumberFormatException ex) {
@@ -178,6 +169,7 @@ public class Banker {
 		}
 
 	}
+	
 	public void mortgage(Player playr, String property, int price) {
 		playr.MorgegedPrpoerties.add(property);
 		playr.ownedProperties.remove(property);
